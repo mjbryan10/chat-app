@@ -9,6 +9,7 @@ export const Container = styled.div`
    flex-flow: row nowrap;
    align-items: center;
    justify-content: center;
+   background: ${({theme}) => theme.background || 'black'}
 `;
 
 export const Form = styled.form`

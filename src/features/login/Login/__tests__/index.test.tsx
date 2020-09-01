@@ -4,6 +4,7 @@ import { render, fireEvent } from '@testing-library/react';
 import axios from 'axios';
 import { Provider } from 'react-redux';
 import { store } from '../../../../app/store';
+import renderer from 'react-test-renderer';
 
 jest.mock('axios');
 
@@ -40,5 +41,18 @@ describe('Login Component', () => {
       fireEvent.click(submitButton);
 
       expect(axios.get).toBeCalledTimes(1);
+   });
+
+   describe('Snapshots', () => {
+      it('renders correctly', () => {
+         const tree = renderer
+            .create(
+               <Provider store={store}>
+                  <Login />
+               </Provider>
+            )
+            .toJSON();
+         expect(tree).toMatchSnapshot();
+      });
    });
 });

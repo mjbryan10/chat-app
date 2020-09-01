@@ -5,19 +5,18 @@ import * as S from './styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectLogin, loginUser } from '../loginSlice';
 
-const Login = ({ ...children }) => {
+const Login: React.FC = ({ children }) => {
    const { isAuthenticated } = useSelector(selectLogin);
    const dispatch = useDispatch();
 
-   const [name, setName] = useState('');
-   const [id, setId] = useState(0);
+   const [name, setName] = useState('Wessel');
+   const [id, setId] = useState(1);
 
    const handleSubmit = (event: React.FormEvent) => {
       event.preventDefault();
       dispatch(loginUser({ id, name }));
    };
 
-   if (isAuthenticated) return <>{children}</>;
    return (
       <S.Container>
          <S.Form action="submit" onSubmit={handleSubmit} data-testid="login-form">
@@ -25,11 +24,13 @@ const Login = ({ ...children }) => {
                handleChange={(value: string) => setName(value)}
                labelValue="Name"
                initialValue="Wessel"
+               disabled
             />
             <InputTextFieldWithLabel
                handleChange={(value: string) => setId(parseInt(value))}
                labelValue="ID"
                initialValue="1"
+               disabled
             />
             {isAuthenticated === false
                ? 'It appears we were unable to log you in with those details, please try again later'

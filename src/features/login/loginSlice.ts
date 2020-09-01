@@ -19,7 +19,7 @@ const userApi = new UserApi();
 
 /**
  * Asynchronous Thunk action that takes an object containing `id` and `name`
- * 
+ *
  * Updates the state with the user credentials and if the user was authenticated.
  */
 export const loginUser = createAsyncThunk(
@@ -43,14 +43,10 @@ export const loginSlice = createSlice({
    extraReducers: (builder) => {
       builder
          .addCase(loginUser.fulfilled, (state, action) => {
-            if (action.payload.isAuthenticated !== false) {
-               state.id = action.payload.id;
-               state.name = action.payload.name;
-            } else {
-               state.id = null;
-               state.name = null;
-               state.isAuthenticated = false;
-            }
+            console.log('action', action);
+            state.id = action.payload.id;
+            state.name = action.payload.name;
+            state.isAuthenticated = action.payload.isAuthenticated;
          })
          .addCase(loginUser.pending, (state, action) => {
             state.id = null;
