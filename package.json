@@ -42,9 +42,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^10.4.9",
-    "@types/react-test-renderer": "^16.9.3",
     "@types/styled-components": "^5.1.2",
-    "msw": "^0.20.5",
-    "react-test-renderer": "^16.13.1"
+    "msw": "^0.20.5"
   }
 }

@@ -43,7 +43,6 @@ export const loginSlice = createSlice({
    extraReducers: (builder) => {
       builder
          .addCase(loginUser.fulfilled, (state, action) => {
-            console.log('action', action);
             state.id = action.payload.id;
             state.name = action.payload.name;
             state.isAuthenticated = action.payload.isAuthenticated;
