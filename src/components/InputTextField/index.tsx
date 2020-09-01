@@ -1,7 +1,7 @@
 import React, { useState, FC } from 'react';
 import * as S from './styles'
 
-interface Props {
+export interface Props {
    disabled?: boolean;
    placeholder?: string;
    initialValue?: string;
