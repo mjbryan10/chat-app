@@ -1,4 +1,5 @@
 import React, { useState, FC } from 'react';
+import * as S from './styles'
 
 interface Props {
    disabled?: boolean;
@@ -22,7 +23,7 @@ const InputTextField: FC<Props> = ({
       setValue(value);
       if (handleChange) handleChange(value);
    };
-   return <input value={value} onChange={onChange} placeholder={placeholder} data-testid="input-text-field" />;
+   return <S.Input value={value} onChange={onChange} placeholder={placeholder} data-testid="input-text-field" />;
 };
 
 export default InputTextField;
