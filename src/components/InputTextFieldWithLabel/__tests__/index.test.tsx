@@ -6,9 +6,7 @@ describe('InputTextFieldWithLabel', () => {
    test('should pass down event handler to input element', () => {
       const testHandler = jest.fn();
       const utils = render(
-         <InputTextFieldWithLabel handleChange={testHandler}>
-            Test
-         </InputTextFieldWithLabel>
+         <InputTextFieldWithLabel handleChange={testHandler} labelValue="Test" />
       );
       const input = utils.getByTestId('input-text-field') as HTMLInputElement;
 
