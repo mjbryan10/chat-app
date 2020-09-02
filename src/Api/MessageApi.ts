@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import BaseApi from "./BaseApi";
-import { Message, ApiPostResponse } from "./@types";
+import { Message, ApiPostResponse, NewMessagesResponse } from "./@types";
 
 export default class MessageApi extends BaseApi {
   async fetchLimitedMessages(
@@ -21,7 +21,7 @@ export default class MessageApi extends BaseApi {
  async fetchNewMessages(
     conversationId: number,
     lastMessageId: number
- ): Promise<AxiosResponse<Message[] | { message: string }>> {
+ ): Promise<AxiosResponse<NewMessagesResponse>> {
     const response = await axios
        .get(`${this.baseUrl}conversation/${conversationId}/new/${lastMessageId}`)
        .catch((error) => {

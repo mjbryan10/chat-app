@@ -30,7 +30,7 @@ export const fetchConversations = createAsyncThunk(
 );
 
 export const conversationSlice = createSlice({
-   name: 'login',
+   name: 'conversation',
    initialState,
    reducers: {
       selectCurrentConversation(state, action) {
@@ -63,7 +63,7 @@ export const conversationSlice = createSlice({
 
 // export const {  } = conversationSlice.actions;
 
-export const selectConversations = (state: RootState) => state.conversations;
-export const selectCurrentConversation = (state: RootState) => state.currentConversation;
+export const selectConversations = (state: RootState) => state.conversation.conversations;
+export const selectCurrentConversation = (state: RootState) => state.conversation.currentConversation;
 
 export default conversationSlice.reducer;
