@@ -15,7 +15,6 @@ describe('UserApi', () => {
 
    describe('FetchById', () => {
       it('fetches successfully data from an API', async () => {
-         //Arrange
          const data = {
             id: 1,
             name: 'Wessel',
@@ -23,9 +22,8 @@ describe('UserApi', () => {
 
          (axios.get as jest.Mock).mockImplementationOnce(() => Promise.resolve(data));
 
-         //Act
          const userInfo = await userApi.fetchById(1);
-         //Assert
+
          expect(userInfo).toEqual({ id: 1, name: 'Wessel' });
          expect(axios.get).toHaveBeenCalledTimes(1);
          expect(axios.get).toHaveBeenCalledWith(`${baseAPi.baseUrl}/user/1`);
@@ -129,7 +127,7 @@ describe('UserApi', () => {
             },
          ];
 
-         (axios.get as jest.Mock).mockImplementationOnce(() => Promise.resolve(data));
+         (axios.get as jest.Mock).mockImplementationOnce(() => Promise.resolve({data}));
 
          const users = await userApi.fetchAll();
 
