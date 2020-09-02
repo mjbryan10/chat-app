@@ -12,5 +12,6 @@ export interface Theme {
   //colors: Colors;
   //pageBackground: string;
   //messageBackground: string;
+  buttonBackground: string;
   inputBackground: string;
 }
