@@ -90,7 +90,9 @@ describe('ThemeToggle', () => {
       const getSpy = jest.spyOn(Cookies, 'get').mockReturnValue({ theme: 'light' });
       const setSpy = jest.spyOn(Cookies, 'set');
 
-      const { checkbox } = setup();
+      // const { checkbox } = setup(); //TODO: resolve issue with checked value
+      setup();
+      //-- 
 
       // Assert
       expect(getSpy).toBeCalledWith('theme');
@@ -98,7 +100,7 @@ describe('ThemeToggle', () => {
       //--
       expect(setSpy).toBeCalledTimes(0);
       //--
-      // expect(checkbox).not.toBeChecked();// TO DO: not recognising checked value
+      // expect(checkbox).not.toBeChecked();//TODO: not recognising checked value
 
       // Cleanup
       getSpy.mockRestore();
