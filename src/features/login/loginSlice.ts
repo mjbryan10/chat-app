@@ -15,6 +15,9 @@ const initialState: loginState = {
    isAuthenticated: null,
 };
 
+/**
+ * userApi for communicating with backend.
+ */
 const userApi = new UserApi();
 
 /**
@@ -23,7 +26,7 @@ const userApi = new UserApi();
  * Updates the state with the user credentials and if the user was authenticated.
  */
 export const loginUser = createAsyncThunk(
-   'users/authenticateUser',
+   'login/authenticateUser',
    async (user: User, thunkAPI) => {
       const { id, name } = user;
       return await userApi.authenticateUser(id, name);
@@ -62,9 +65,6 @@ export const loginSlice = createSlice({
 
 export const { logoutUser } = loginSlice.actions;
 
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectLogin = (state: RootState) => state.login;
 
 export default loginSlice.reducer;
