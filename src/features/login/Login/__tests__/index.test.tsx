@@ -40,17 +40,4 @@ describe('Login Component', () => {
 
       expect(axios.get).toBeCalledTimes(1);
    });
-
-  //  describe('Snapshots', () => {
-  //     it('renders correctly', () => {
-  //        const tree = renderer
-  //           .create(
-  //              <Provider store={store}>
-  //                 <Login />
-  //              </Provider>
-  //           )
-  //           .toJSON();
-  //        expect(tree).toMatchSnapshot();
-  //     });
-  //  });
 });

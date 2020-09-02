@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-
-type ThemeName = 'dark' | 'light';
+import { ThemeName } from '../../theme/@types';
 
 interface themeState {
    currentTheme: ThemeName;
