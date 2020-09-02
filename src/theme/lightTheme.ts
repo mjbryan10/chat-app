@@ -1,6 +1,9 @@
 import { Theme } from "./@types";
 
 const lightTheme: Theme = {
+  color: {
+    text: 'black',
+  },
   buttonBackground: `linear-gradient(
     173deg,
     rgba(249, 212, 35, 1) 0%,

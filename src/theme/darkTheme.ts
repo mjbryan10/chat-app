@@ -1,6 +1,9 @@
 import { Theme } from './@types';
 
 const darkTheme: Theme = {
+  color: {
+    text: 'white',
+  },
    buttonBackground: `linear-gradient(
     173deg,
     rgba(249, 212, 35, 1) 0%,
