@@ -52,36 +52,28 @@ describe('UserApi', () => {
 
    describe('authenticateUserById', () => {
       it('finds user in database matching credentials given', async () => {
-         //Arrange
-         const data = {
-            id: 1,
-            name: 'Wessel',
-         };
-
          const response = {
-            data,
+            data: {
+               id: 1,
+               name: 'Wessel',
+            },
          };
-
          (axios.get as jest.Mock).mockImplementationOnce(() => Promise.resolve(response));
 
-         //Act
          const apiResponse = await userApi.authenticateUser(1, 'Wessel');
-         //Assert
+
          expect(apiResponse.isAuthenticated).toEqual(true);
          expect(axios.get).toHaveBeenCalledTimes(1);
          expect(axios.get).toHaveBeenCalledWith(`${baseAPi.baseUrl}/user/1`);
       });
 
       it('informs user is not authenticated if wrong details given', async () => {
-         const data = {
-            id: 1,
-            name: 'Wessel',
-         };
-
          const response = {
-            data,
+            data: {
+               id: 1,
+               name: 'Wessel',
+            },
          };
-
          (axios.get as jest.Mock).mockImplementationOnce(() => Promise.resolve(response));
 
          const apiResponse = await userApi.authenticateUser(1, 'bob');
@@ -96,7 +88,9 @@ describe('UserApi', () => {
             Promise.reject(new Error(errorMessage))
          );
 
-         await expect(userApi.authenticateUser(1, 'Wessel')).rejects.toThrow(errorMessage);
+         await expect(userApi.authenticateUser(1, 'Wessel')).rejects.toThrow(
+            errorMessage
+         );
          expect(axios.get).toHaveBeenCalledTimes(1);
          expect(axios.get).toHaveBeenCalledWith(`${baseAPi.baseUrl}/user/1`);
       });
@@ -126,8 +120,8 @@ describe('UserApi', () => {
                name: 'Patrick',
             },
          ];
-
-         (axios.get as jest.Mock).mockImplementationOnce(() => Promise.resolve({data}));
+         const response = { data };
+         (axios.get as jest.Mock).mockImplementationOnce(() => Promise.resolve(response));
 
          const users = await userApi.fetchAll();
 

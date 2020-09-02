@@ -1,3 +1,7 @@
 export default class BaseApi {
-  protected readonly baseUrl = 'http://assignment.bunq.com/'
+  private readonly _baseUrl = 'http://assignment.bunq.com/'
+
+  get baseUrl() {
+    return this._baseUrl
+  }
 }
