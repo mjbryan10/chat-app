@@ -11,7 +11,8 @@ export default class UserApi extends BaseApi {
     * @returns The user or false if unable to find.
     */
    fetchById = async (id: number): Promise<AxiosResponse<User | false>> => {
-      return await axios.get(`${this.baseUrl}/user/${id}`);
+      return await axios.get(`${this.baseUrl}/user/${id}`)
+      .catch(error => {throw error});
    };
    /**
     * Attempts to verify a user by matching the name to the name of a user by

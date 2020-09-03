@@ -11,9 +11,9 @@ export interface ConversationDetails {
    id: number | null;
    conversationId: number | null;
    is_owner: number;
-   userId: number;
+   userid: number;
    status: number | null;
-   lastseen: string;
+   lastseen: string| null;
    name: string | null;
    type: number | null;
 }
