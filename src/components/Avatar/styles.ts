@@ -1,20 +1,26 @@
-import styled, {ThemeProps, Theme} from 'styled-components';
+import styled, { ThemeProps, Theme, ThemeColor } from 'styled-components';
 
-interface Props {
-  theme: Theme;
-  size?: number;
+interface BaseProps extends ThemeProps<Theme> {
+   size: number;
 }
 
-export const Container = styled.div`
-  border: ${({theme}: ThemeProps<Theme>) => theme.border ?? 'inherit'};
-  width: ${({size}:Props) => size}px;
-  height: ${({size}:Props) => size}px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+interface OuterContainer extends BaseProps {
+   color: ThemeColor;
+}
+
+export const Container = styled.div<OuterContainer>`
+   border: ${({ theme }) => theme.border ?? 'inherit'};
+   max-width: ${({ size }) => size}px;
+   max-height: ${({ size }) => size}px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: ${({ color, theme }) => theme.color[color]};
+   border-color: ${({ color, theme }) => theme.color[color]};
 `;
 
-export const InnerContainer = styled.span`
-  display: block;
-  text-transform: uppercase;
+export const InnerContainer = styled.span<BaseProps>`
+   display: block;
+   text-transform: uppercase;
+   font-size: ${({ size }) => (size ?? 50) * 0.8}px;
 `;
