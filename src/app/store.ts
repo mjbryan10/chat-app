@@ -1,9 +1,17 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import loginReducer from '../features/login/loginSlice';
+import usersReducer from '../features/users/usersSlice';
+import themeReducer from '../features/theme/themeSlice';
+import conversationReducer from '../features/conversation/conversationSlice';
+import messageReducer from '../features/message/messageSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    login: loginReducer,
+    users: usersReducer,
+    theme: themeReducer,
+    conversation: conversationReducer,
+    message: messageReducer
   },
 });
 
