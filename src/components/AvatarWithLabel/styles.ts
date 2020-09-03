@@ -4,7 +4,7 @@ interface LabelProps extends ThemeProps<Theme> {
    selected: boolean;
 }
 
-export const Label = styled.button<LabelProps>`
+export const Label = styled.div<LabelProps>`
    display: flex;
    flex-flow: row wrap;
    background: ${({theme: {background}, selected}) => (selected) ? background.conversation : background.conversationSelected}

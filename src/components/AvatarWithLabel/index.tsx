@@ -16,7 +16,7 @@ const AvatarWithLabel: FC<Props> = ({
    return (
       <S.Label selected={selected}>
          <Avatar title={title} size={size} color={color} />
-         <span>{title}</span>
+         <span data-testid="avatar-with-label-span">{title}</span>
       </S.Label>
    );
 };

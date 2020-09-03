@@ -7,6 +7,7 @@ import { selectLogin } from './features/login/loginSlice';
 import { selectTheme } from './features/theme/themeSlice';
 import ThemeToggle from './features/theme/ThemeToggle';
 import Avatar from 'components/Avatar';
+import ConversationList from 'features/conversation/ConversationList';
 
 function App() {
    const { isAuthenticated } = useSelector(selectLogin);
@@ -14,7 +15,7 @@ function App() {
 
    return (
          <ThemeProvider theme={(theme === 'dark') ? dark : light}>
-            {isAuthenticated ? <Avatar color="cyan"/> : <Login />}
+            {isAuthenticated ? <ConversationList /> : <Login />}
             <ThemeToggle />
          </ThemeProvider>
    );
