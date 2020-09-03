@@ -1,10 +1,8 @@
 import { Theme } from 'styled-components';
+import defaultColors from './colors';
 
 const darkTheme: Theme = {
-   color: {
-      text: '#fff',
-      dark: '#212529',
-   },
+   color: {...defaultColors, text: '#fff'},
    background: {
       page: `linear-gradient(180deg, rgba(52,58,64,1) 0%, rgba(41,46,48,1) 100%)`,
       buttonPrimary: `linear-gradient(
@@ -14,7 +12,7 @@ const darkTheme: Theme = {
   )`,
       inputField: '#6C757D',
    },
-   border: `1px solid #212529`,
+   border: `1.5px solid #212529`,
 };
 
 export default darkTheme;
