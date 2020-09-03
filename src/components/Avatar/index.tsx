@@ -2,7 +2,7 @@ import React, { FC, useMemo } from 'react';
 import * as S from './styles';
 import { ThemeColor } from 'styled-components';
 
-interface Props {
+export interface Props {
    text?: string;
    size?: number
    color?: ThemeColor;

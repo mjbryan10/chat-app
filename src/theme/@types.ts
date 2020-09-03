@@ -1,16 +1,38 @@
 /**
- * Colors found on the theme
+ * Class for making an array of colors
+ * 
+ * 
+ * Technique to avoid hard typing names into array:
+ * @see https://stackoverflow.com/a/59806829/12873927
  */
-export interface ThemeColors {
-   primary: string;
-   secondary: string;
-   success: string;
-   warning: string;
-   danger: string;
-   info: string;
-   dark: string;
-   light: string;
-   text: string;
+class ColorSpectrumList {
+   /**
+    * 
+    */
+   constructor(
+      readonly blue?: string,
+      readonly indigo?: string,
+      readonly purple?: string,
+      readonly pink?: string,
+      readonly red?: string,
+      readonly orange?: string,
+      readonly yellow?: string,
+      readonly green?: string,
+      readonly teal?: string,
+      readonly cyan?: string,
+   ){}
+}
+
+/**
+ * An array of color names for use.
+ */
+export const colorSpectrumArray: string[] = Object.keys(new ColorSpectrumList())
+/**
+ * Color Spectrum
+ * 
+ * Implements class and makes fields no longer optional.
+ */
+export interface ColorSpectrum extends ColorSpectrumList {
    blue: string;
    indigo: string;
    purple: string;
@@ -21,6 +43,24 @@ export interface ThemeColors {
    green: string;
    teal: string;
    cyan: string;
+   /**
+    * Color for the owner of message/conversation
+    */
+   owner: string;
+}
+/**
+ * Colors found on the theme
+ */
+export interface ThemeColors extends ColorSpectrum {
+   primary: string;
+   secondary: string;
+   success: string;
+   warning: string;
+   danger: string;
+   info: string;
+   dark: string;
+   light: string;
+   text: string;
    white: string;
    gray: string;
    grayDark: string;
@@ -37,6 +77,8 @@ export interface ThemeBackgrounds {
    //messageBackground: string;
    buttonPrimary: string;
    inputField: string;
+   conversation: string;
+   conversationSelected: string;
 }
 
 /**
