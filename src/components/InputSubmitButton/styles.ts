@@ -1,10 +1,13 @@
-import styled from 'styled-components';
+import styled, { ThemeProps, Theme } from 'styled-components';
 
 export const Input = styled.input`
    background: rgb(249, 212, 35);
-   background: linear-gradient(
-      173deg,
-      rgba(249, 212, 35, 1) 0%,
-      rgba(248, 54, 0, 1) 100%
-   );
+   background: ${({ theme: { background } }: ThemeProps<Theme>) =>
+      background.buttonPrimary || 'inherit'};
+   border: ${({ theme }: ThemeProps<Theme>) => theme.border};
+   padding: 1em;
+   margin: 0 0.3rem;
+   &:hover {
+      cursor: pointer;
+   }
 `;

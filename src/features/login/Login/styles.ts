@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { ThemeProps, Theme } from 'styled-components';
 
 export const Container = styled.div`
    position: fixed;
@@ -9,12 +9,15 @@ export const Container = styled.div`
    flex-flow: row nowrap;
    align-items: center;
    justify-content: center;
-   background: ${({theme}) => theme.background || 'black'}
+   display: flex;
+   background: ${({ theme }: ThemeProps<Theme>) => theme.background.page || 'black'};
 `;
 
 export const Form = styled.form`
    padding: 1em;
-   display: block;
    position: relative;
    flex-flow: column nowrap;
+   display: flex;
+   /* justify-content: flex-end; */
+   align-items: flex-end;
 `;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { ThemeProps, Theme } from 'styled-components';
 
 //Inspiration from:
 //https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_switch
@@ -27,7 +27,7 @@ export const Slider = styled.span`
       width: 26px;
       left: 4px;
       bottom: 4px;
-      background-color: white;
+      background: ${({ theme }: ThemeProps<Theme>) => theme.background.buttonPrimary};
       -webkit-transition: 0.4s;
       transition: 0.4s;
       ${Input}:checked + & {
@@ -35,10 +35,11 @@ export const Slider = styled.span`
          -ms-transform: translateX(26px);
          transform: translateX(26px);
       }
+      border: ${({ theme }: ThemeProps<Theme>) => theme.border};
    }
 
    ${Input}:checked + & {
-      background: ${({theme}) => theme.buttonBackground};
+      background: ${({ theme }: ThemeProps<Theme>) => theme.background.inputField};
    }
    ${Input}:focus + & {
       box-shadow: 0 0 1px #2196f3;
@@ -50,6 +51,7 @@ export const Switch = styled.label`
    display: inline-block;
    width: 60px;
    height: 34px;
+   border: ${({ theme }: ThemeProps<Theme>) => theme.border};
 `;
 
 export const Container = styled.div`

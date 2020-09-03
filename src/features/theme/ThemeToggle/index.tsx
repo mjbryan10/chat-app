@@ -29,7 +29,7 @@ const ThemeToggle = () => {
 
    return (
       <S.Container>
-         {/* <image of the sun> */}0
+         {/* <image of the sun> */}
          <S.Switch>
             <S.Input
                type="checkbox"
@@ -37,9 +37,10 @@ const ThemeToggle = () => {
                checked={currentTheme === 'dark'}
                data-testid="theme-toggle-checkbox"
             />
-            <S.Slider></S.Slider>
+            <S.Slider>
+            </S.Slider>
          </S.Switch>
-         {/* <image of the moon> */})
+         {/* <image of the moon> */}
       </S.Container>
    );
 };

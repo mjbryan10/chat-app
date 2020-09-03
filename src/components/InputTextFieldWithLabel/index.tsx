@@ -1,6 +1,7 @@
 import React from 'react';
 import InputTextField from '../InputTextField';
 import {Props as InputProps} from '../InputTextField'
+import * as S from './styles';
 
 interface Props extends InputProps{
   labelValue: string;
@@ -8,10 +9,10 @@ interface Props extends InputProps{
 
 const InputTextFieldWithLabel: React.FC<Props> = ({labelValue, ...props}) => {
   return (
-    <label>
+    <S.Label>
       {labelValue}
       <InputTextField {...props} />
-    </label>
+    </S.Label>
   )
 }
 
