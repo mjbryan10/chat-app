@@ -7,7 +7,7 @@ interface Props extends AvatarProps {
 }
 
 const AvatarWithLabel: FC<Props> = ({
-   text,
+   title,
    size = 50,
    color = 'owner',
    selected = false,
@@ -15,8 +15,8 @@ const AvatarWithLabel: FC<Props> = ({
   
    return (
       <S.Label selected={selected}>
-         <Avatar text={text} size={size} color={color} />
-         <span>{text}</span>
+         <Avatar title={title} size={size} color={color} />
+         <span>{title}</span>
       </S.Label>
    );
 };
