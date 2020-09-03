@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { Provider } from 'react-redux';
 import ThemeToggle from '..';
 import { store } from '../../../../app/store';
-import { render, fireEvent, cleanup } from '@testing-library/react';
+import { render, fireEvent, cleanup } from 'testing-utils';
 
 jest.mock('js-cookie');
 const setup = () => {
@@ -17,7 +17,7 @@ const setup = () => {
 };
 
 describe('ThemeToggle', () => {
-   afterEach(cleanup);
+   beforeEach(cleanup);
 
    test('expect cookie to be consumed on render', () => {
       const getSpy = jest.spyOn(Cookies, 'get').mockReturnValue({ theme: 'dark' });

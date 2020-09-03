@@ -10,7 +10,7 @@ export const Container = styled.div`
    align-items: center;
    justify-content: center;
    display: flex;
-   background: ${({ theme }: ThemeProps<Theme>) => theme.background.page || 'black'};
+   background: ${({ theme }: ThemeProps<Theme>) => theme.background.page ?? 'black'};
 `;
 
 export const Form = styled.form`
@@ -18,6 +18,5 @@ export const Form = styled.form`
    position: relative;
    flex-flow: column nowrap;
    display: flex;
-   /* justify-content: flex-end; */
    align-items: flex-end;
 `;

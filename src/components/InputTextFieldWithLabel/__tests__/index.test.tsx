@@ -1,6 +1,6 @@
 import React from 'react';
 import InputTextFieldWithLabel from '..';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from 'testing-utils';
 
 describe('InputTextFieldWithLabel', () => {
    test('should pass down event handler to input element', () => {

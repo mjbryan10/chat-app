@@ -1,6 +1,6 @@
 import React from 'react';
 import Login from '..';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from 'testing-utils';
 import axios from 'axios';
 import { Provider } from 'react-redux';
 import { store } from '../../../../app/store';
