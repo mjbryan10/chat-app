@@ -19,7 +19,13 @@ const initialState: conversationState = {
    currentConversationId: null,
    status: 'fulfilled',
 };
-
+/**
+ * Returns the date as a number for comparison or 0 if there was no date.
+ *
+ * @param lastseen Date string in 'YYYY-M-D H:mm:ss' format or null
+ */
+export const convertStringToUnix = (lastseen: string | null): number =>
+   lastseen ? moment(lastseen, 'YYYY-M-D H:mm:ss').valueOf() : 0; //TODO: Consider extracting further
 /**
  * Takes the newest conversations from an array of unfiltered conversations, removes any duplicates, removes
  * any conversations that do not have 2 or more persons in them and sorts the array chronologically (newest first)
@@ -68,13 +74,6 @@ export const filterConversations = (
    const conversationsWithUsers = conversationsWithNoDuplicates.filter(
       (conversation) => conversation.users.length > 1
    );
-   /**
-    * Returns the date as a number for comparison or 0 if there was no date.
-    *
-    * @param lastseen Date string in 'YYYY-M-D H:mm:ss' format or null
-    */
-   const convertStringToUnix = (lastseen: string | null): number =>
-      lastseen ? moment(lastseen, 'YYYY-M-D H:mm:ss').valueOf() : 0; //TODO: Extract to helper function
 
    /**
     * The result is the returned value of sorting the array chronologically (newest first).
