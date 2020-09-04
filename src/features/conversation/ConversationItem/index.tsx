@@ -38,7 +38,7 @@ export const computeConversationName = async (
    const friendUser = conversation.users.find((user) => user.userid !== currentUserId);
 
    if (friendUser) {
-      const response = await new UserApi().fetchById(friendUser.id);
+      const response = await new UserApi().fetchById(friendUser.userid);
 
       return response.data ? response.data.name : 'Anonymous';
    }
