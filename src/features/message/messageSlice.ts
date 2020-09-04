@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Message, NewMessagesResponse } from '../../Api/@types';
 import MessageApi from '../../Api/MessageApi';
+import moment from 'moment';
 
 /**
  * The arguments passed to the payLoadCreator for fetchNewMessages
@@ -113,7 +114,7 @@ export const messageSlice = createSlice({
          /* fetchNewMessages */
          .addCase(fetchNewMessages.fulfilled, (state, action) => {
             const { data, status } = action.payload;
-            const now = Date.now()
+            const now = moment().valueOf();
 
             if (status === 200 && Array.isArray(data) && state.lastUpdated < now) {
                state.messages = [...state.messages, ...data];
