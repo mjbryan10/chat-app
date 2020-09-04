@@ -5,14 +5,31 @@ import { User, LoginResponse } from './@types';
 export default class UserApi extends BaseApi {
    /**
     * Returns a promise.
-    * 
+    *
     * Attempts to fetch a user from the API by its user.
     * @param id The id of the desired user
     * @returns The user or false if unable to find.
     */
    fetchById = async (id: number): Promise<AxiosResponse<User | false>> => {
-      return await axios.get(`${this.baseUrl}/user/${id}`)
-      .catch(error => {throw error});
+      return await axios.get(`${this.baseUrl}/user/${id}`).catch((error) => {
+         throw error;
+      });
+   };
+   /**
+    * Fetches a users name by the given ID.
+    *
+    * If unable to fetch the user or connect to the API, will throw relevant error.
+    * @param id The id of the user for which you wish to find the name
+    */
+   fetchUserNameById = async (id: number): Promise<string> => {
+      return await this.fetchById(id)
+         .then(({ data }) => {
+            if (!data) throw new Error('User was not found');
+            return data.name;
+         })
+         .catch(() => {
+            throw new Error('Unable to fetch users at this time');
+         });
    };
    /**
     * Attempts to verify a user by matching the name to the name of a user by
@@ -21,8 +38,9 @@ export default class UserApi extends BaseApi {
     * @param name The Name of the user
     */
    authenticateUser = async (id: number, name: string): Promise<LoginResponse> => {
-      const response = await this.fetchById(id)
-      .catch(error => {throw error});
+      const response = await this.fetchById(id).catch((error) => {
+         throw error;
+      });
       if (response.data !== false && response.data.name === name) {
          return {
             id: response.data.id,
@@ -36,8 +54,11 @@ export default class UserApi extends BaseApi {
     * Fetches all users from the database.
     */
    fetchAll = async (): Promise<User[]> => {
-      return await axios.get(`${this.baseUrl}/users`)
-      .then(response => response.data)
-      .catch(error => {throw error});
+      return await axios
+         .get(`${this.baseUrl}/users`)
+         .then((response) => response.data)
+         .catch((error) => {
+            throw error;
+         });
    };
 }
