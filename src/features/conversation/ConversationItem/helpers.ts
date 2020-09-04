@@ -24,9 +24,16 @@ export const computeConversationName = async (
   const friendUser = conversation.users.find((user) => user.userid !== currentUserId);
 
   if (friendUser) {
-     const response = await new UserApi().fetchById(friendUser.userid);
+    try {
+      return await new UserApi().fetchUserNameById(friendUser.userid)
+    } catch (error) {
+      return 'Anonymous'
+    } //TODO: Test if this works!
+    
+    //  const response = await new UserApi().fetchUserNameById(friendUser.userid)
+     
 
-     return response.data ? response.data.name : 'Anonymous';
+    //  return response.data ? response.data.name : 'Anonymous';
   }
   return 'Unknown conversation name';
 };
