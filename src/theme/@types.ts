@@ -74,7 +74,7 @@ export type ThemeColor = keyof ThemeColors;
  */
 export interface ThemeBackgrounds {
    page: string;
-   //messageBackground: string;
+   message: string;
    buttonPrimary: string;
    inputField: string;
    conversation: string;

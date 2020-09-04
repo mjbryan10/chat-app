@@ -14,6 +14,7 @@ const darkTheme: Theme = {
       conversation: 'linear-gradient(180deg, #4E5358 0%, #42474D 100%)',
       conversationSelected:
          'linear-gradient(180deg, #2E3236 0%, #3D4044 100%)',
+         message: '#343A40',
    },
    border: `1.5px solid #212529`,
 };
