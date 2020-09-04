@@ -1,9 +1,11 @@
 import React from 'react';
 import { render, RenderResult } from 'testing-utils';
 import MessageItem from '..';
-import { cleanup } from '@testing-library/react';
+import { cleanup, waitFor, screen } from '@testing-library/react';
+import axios from 'axios';
+import { act } from 'react-dom/test-utils';
 
-jest.mock('moment');
+jest.mock('axios');
 
 describe('MessageItem Component', () => {
    const testMessage = {
@@ -14,9 +16,8 @@ describe('MessageItem Component', () => {
       conversationid: 2,
       status: 0,
    };
-   describe('MessageItem standard implementation', () => {
-      let utils: RenderResult;
-
+   let utils: RenderResult;
+   describe('MessageItem intial render', () => {
       beforeEach(() => {
          utils = render(<MessageItem message={testMessage} />);
       });
@@ -31,19 +32,23 @@ describe('MessageItem Component', () => {
          expect(getByText(/The first message/i)).toBeVisible();
       });
 
-      test('should display message sent time', () => {
+      test('should display message sent time (MM:SS format)', () => {
          const { getByText } = utils;
          expect(getByText(/08:15/i)).toBeVisible();
       });
-
-      test('should display user name', () => {
-        const { getByText } = utils;
-
-        expect(getByText(/'Wessel'/i)).toBeVisible();
-      })
-      
    });
+   describe('MessageItem after axios response', () => {
+      test('should fetch and display username', async () => {
+        //  let utils: RenderResult;
+         (axios.get as jest.Mock).mockImplementationOnce(() => Promise.resolve('Wessel'));
 
-   
+         render(<MessageItem message={testMessage} />);
+        //  await act(() => {
+        // });
+
+         await waitFor(() => expect(screen.getByText(/'Wessel'/i)));
+         expect(axios.get).toHaveBeenCalledTimes(1);
+         expect(screen.getByText(/'Wessel'/i)).toBeVisible();
+      });
+   });
 });
-
