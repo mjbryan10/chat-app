@@ -22,11 +22,11 @@ class ColorSpectrumList {
       readonly cyan?: string,
    ){}
 }
-
+export type SpectrumColor = keyof ColorSpectrumList;
 /**
  * An array of color names for use.
  */
-export const colorSpectrumArray: string[] = Object.keys(new ColorSpectrumList())
+export const colorSpectrumArray = Object.keys(new ColorSpectrumList()) as SpectrumColor[]; 
 /**
  * Color Spectrum
  * 
