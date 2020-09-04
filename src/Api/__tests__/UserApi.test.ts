@@ -11,7 +11,7 @@ describe('UserApi', () => {
 
    const errorMessage = 'request rejected';
    const userApi = new UserApi();
-   const baseAPi = new BaseApi();
+   const baseApi = new BaseApi();
 
    describe('FetchById', () => {
       it('fetches successfully data from an API', async () => {
@@ -26,7 +26,7 @@ describe('UserApi', () => {
 
          expect(userInfo).toEqual({ id: 1, name: 'Wessel' });
          expect(axios.get).toHaveBeenCalledTimes(1);
-         expect(axios.get).toHaveBeenCalledWith(`${baseAPi.baseUrl}/user/1`);
+         expect(axios.get).toHaveBeenCalledWith(`${baseApi.baseUrl}/user/1`);
       });
 
       it('handles if user id is not present in database', async () => {
@@ -36,7 +36,7 @@ describe('UserApi', () => {
 
          expect(userInfo).toEqual(false);
          expect(axios.get).toHaveBeenCalledTimes(1);
-         expect(axios.get).toHaveBeenCalledWith(`${baseAPi.baseUrl}/user/42`);
+         expect(axios.get).toHaveBeenCalledWith(`${baseApi.baseUrl}/user/42`);
       });
 
       it('fetches erroneously data from an API', async () => {
@@ -46,7 +46,7 @@ describe('UserApi', () => {
 
          await expect(userApi.fetchById(42)).rejects.toThrow(errorMessage);
          expect(axios.get).toHaveBeenCalledTimes(1);
-         expect(axios.get).toHaveBeenCalledWith(`${baseAPi.baseUrl}/user/42`);
+         expect(axios.get).toHaveBeenCalledWith(`${baseApi.baseUrl}/user/42`);
       });
    });
 
@@ -64,7 +64,7 @@ describe('UserApi', () => {
 
          expect(apiResponse.isAuthenticated).toEqual(true);
          expect(axios.get).toHaveBeenCalledTimes(1);
-         expect(axios.get).toHaveBeenCalledWith(`${baseAPi.baseUrl}/user/1`);
+         expect(axios.get).toHaveBeenCalledWith(`${baseApi.baseUrl}/user/1`);
       });
 
       it('informs user is not authenticated if wrong details given', async () => {
@@ -80,7 +80,7 @@ describe('UserApi', () => {
 
          expect(apiResponse.isAuthenticated).toEqual(false);
          expect(axios.get).toHaveBeenCalledTimes(1);
-         expect(axios.get).toHaveBeenCalledWith(`${baseAPi.baseUrl}/user/1`);
+         expect(axios.get).toHaveBeenCalledWith(`${baseApi.baseUrl}/user/1`);
       });
 
       it('fetches erroneously data from an API', async () => {
@@ -92,7 +92,7 @@ describe('UserApi', () => {
             errorMessage
          );
          expect(axios.get).toHaveBeenCalledTimes(1);
-         expect(axios.get).toHaveBeenCalledWith(`${baseAPi.baseUrl}/user/1`);
+         expect(axios.get).toHaveBeenCalledWith(`${baseApi.baseUrl}/user/1`);
       });
    });
 
