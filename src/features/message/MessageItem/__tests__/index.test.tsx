@@ -45,7 +45,9 @@ describe('MessageItem Component', () => {
          render(<MessageItem message={testMessage} />);
         //  await act(() => {
         // });
-
+        //TODO: Resolve issue here
+        //@see https://github.com/testing-library/dom-testing-library/issues/477
+        
          await waitFor(() => expect(screen.getByText(/'Wessel'/i)));
          expect(axios.get).toHaveBeenCalledTimes(1);
          expect(screen.getByText(/'Wessel'/i)).toBeVisible();
