@@ -6,8 +6,8 @@ interface ButtonProps extends ThemeProps<Theme> {
 
 export const ItemButton = styled.button<ButtonProps>`
    &,
-   &::active {
+   &:active {
       background: ${({ theme: { background }, selected }) =>
-         selected ? background.conversation : background.conversationSelected};
+         selected ? background.conversationSelected : background.conversation};
    }
 `;

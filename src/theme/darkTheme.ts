@@ -11,9 +11,9 @@ const darkTheme: Theme = {
      rgba(248, 54, 0, 1) 100%
   )`,
       inputField: '#6C757D',
-      conversation: 'linear-gradient(180deg, rgba(78,83,88,1) 0%, rgba(66,71,77,1) 100%)',
+      conversation: 'linear-gradient(180deg, #4E5358 0%, #42474D 100%)',
       conversationSelected:
-         'linear-gradient(180deg, rgba(78,83,88,1) 0%, rgba(66,71,77,1) 100%)',
+         'linear-gradient(180deg, #2E3236 0%, #3D4044 100%)',
    },
    border: `1.5px solid #212529`,
 };
