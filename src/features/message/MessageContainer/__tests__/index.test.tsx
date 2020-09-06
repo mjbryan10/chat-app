@@ -21,7 +21,7 @@ describe('MessageContainer', () => {
    test('should request the username from the server on mount', () => {
       (axios.get as jest.Mock)
          .mockImplementationOnce(() => Promise.resolve(testUser));
-         render(<MessageContainer message={testMessage} />)
+         render(<MessageContainer message={testMessage} color="red" />)
       expect(axios.get).toBeCalledTimes(1);
    });
 });

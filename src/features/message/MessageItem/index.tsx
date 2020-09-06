@@ -1,14 +1,13 @@
-import React, { FC, useEffect, useState } from 'react';
-import moment from 'moment';
-import { Message } from 'Api/@types';
+import React, { FC } from 'react';
 import * as S from './styles';
 import { ThemeColor } from 'styled-components';
 // import UserApi from 'Api/UserApi';
 export interface Props {
-  message: Message;
-  username: string;
-  isChainMessage?: boolean;
-  color?: ThemeColor;
+   messageText: string;
+   username: string;
+   isChainMessage?: boolean;
+   color: ThemeColor;
+   time: string;
 }
 
 /**
@@ -16,35 +15,22 @@ export interface Props {
  * @param message A message object from the API
  * @param isChaind A `boolean` to indicate if the message is part of a chain
  */
-const MessageItem: FC<Props> = ({ message, username, isChainMessage: isChained = false,  color = "owner"}) => {
+const MessageItem: FC<Props> = ({
+   messageText,
+   username,
+   isChainMessage = false,
+   color,
+   time,
+}) => {
+   return (
+      <S.Container color={color} isChained={isChainMessage}>
+         <S.Header>
+            <S.Detail>{username}</S.Detail>
+            <S.Detail>{time}</S.Detail>
+         </S.Header>
+         <S.Body>{messageText}</S.Body>
+      </S.Container>
+   );
+};
 
-  // const [name, setName] = useState("");
-
-  // useEffect(() => {
-  //   const userApi = new UserApi();
-  //   userApi.fetchUserNameById(message.senderId)
-  //   .then(result => setName(result))
-  //   .catch(error => {
-  //     //TODO: Consider having global error element here for Redux
-  //   })
-  // }, [message.senderId])
-
-  const time = moment(message.timestamp, 'YYYY-MM-DD HH:mm:ss').format('hh:mm');
-  return (
-    <S.Container color={color} isChained={isChained}>
-      <S.Header>
-        <S.Detail>
-          {username}
-        </S.Detail>
-        <S.Detail>
-          {time}
-        </S.Detail>
-      </S.Header>
-      <S.Body>
-        {message.message}
-      </S.Body>
-    </S.Container>
-  )
-}
-
-export default MessageItem
+export default MessageItem;

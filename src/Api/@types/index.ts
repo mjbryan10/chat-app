@@ -13,7 +13,7 @@ export interface ConversationDetails {
    is_owner: number;
    userid: number;
    status: number | null;
-   lastseen: string| null;
+   lastseen: string | null;
    name: string | null;
    type: number | null;
 }

@@ -17,7 +17,14 @@ describe('MessageItem Component', () => {
    let utils: RenderResult;
    describe('MessageItem intial render', () => {
       beforeEach(() => {
-         utils = render(<MessageItem message={testMessage} username="Wessel" />);
+         utils = render(
+            <MessageItem
+               messageText={testMessage.message}
+               username="Wessel"
+               color="owner"
+               time="08:15"
+            />
+         );
       });
       afterEach(() => {
          jest.resetAllMocks();
