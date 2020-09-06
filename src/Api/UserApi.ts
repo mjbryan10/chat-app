@@ -24,6 +24,9 @@ export default class UserApi extends BaseApi {
    fetchUserNameById = async (id: number): Promise<string> => {
       return await this.fetchById(id)
          .then(({ data }) => {
+            if (data === false) return 'Anonymous';
+            //it is possible on API to message from a user that doesn't exist
+            //these can be identified as Anonymous users.
             if (!data) throw new Error('User was not found');
             return data.name;
          })
