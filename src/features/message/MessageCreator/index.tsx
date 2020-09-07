@@ -3,14 +3,17 @@ import InputSubmitButton from 'components/InputSubmitButton';
 
 interface Props {
    handleSubmit?: (value: string) => void;
+   disabled?: boolean;
 }
 
-const MessageCreator: FC<Props> = ({ handleSubmit }) => {
+const MessageCreator: FC<Props> = ({ handleSubmit, disabled = false }) => {
    const [messageValue, setMessageValue] = useState('');
    const onSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      if(handleSubmit) handleSubmit(messageValue);
-      setMessageValue('');
+      if (!disabled) {
+         event.preventDefault();
+         if (handleSubmit) handleSubmit(messageValue);
+         setMessageValue('');
+      }
    };
    const onChange = (event: SyntheticEvent<HTMLTextAreaElement>) => {
       event.preventDefault();
@@ -24,8 +27,13 @@ const MessageCreator: FC<Props> = ({ handleSubmit }) => {
             placeholder="Write your meessage here"
             onChange={onChange}
             data-testid="message-creator-textbox"
+            disabled={disabled}
          />
-         <InputSubmitButton value="Send" data-testid="message-creator-button" />
+         <InputSubmitButton
+            value="Send"
+            data-testid="message-creator-button"
+            disabled={disabled}
+         />
       </form>
    );
 };

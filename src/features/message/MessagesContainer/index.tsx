@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectMessages, fetchConversationMessages, Participant } from '../messageSlice';
+import {
+   selectMessages,
+   fetchConversationMessages,
+   Participant,
+   fetchNewMessages,
+} from '../messageSlice';
 import { selectLogin } from 'features/login/loginSlice';
 import MessageList from '../MessageList';
 import Spinner from 'components/Spinner';
@@ -8,9 +13,10 @@ import {
    selectCurrentConversationId,
    selectCurrentConversation,
 } from 'features/conversation/conversationSlice';
-import { colorSpectrumArray } from 'shared/theme/@types';
+import { colorSpectrumArray } from 'shared/Types/theme.types';
 import UserApi from 'shared/Api/UserApi';
-
+import MessageCreator from '../MessageCreator';
+import MessageApi from 'shared/Api/MessageApi';
 
 const MessagesContainer = () => {
    //REDUX:
@@ -56,6 +62,22 @@ const MessagesContainer = () => {
       }
    }, [currentConversation, currentUser.id]);
 
+   const onMessagePost = (value: string) => {
+      const messageApi = new MessageApi();
+      if (conversationId && currentUser.id && currentUser.isAuthenticated) {
+         messageApi.postMessage(conversationId, currentUser.id, value);
+      }
+      if (conversationId && messages.length) {
+         setTimeout(() => {
+            dispatch(
+               fetchNewMessages({
+                  conversationId,
+                  lastMessageId: messages[messages.length - 1].conversationid,
+               })
+            );
+         }, 300);
+      }
+   };
    return (
       <div>
          {messages.length && participants.length ? (
@@ -65,7 +87,10 @@ const MessagesContainer = () => {
          )}
          <div></div>
 
-         {/* <MessageCreator /> */}
+         <MessageCreator
+            handleSubmit={onMessagePost}
+            disabled={currentUser && conversationId ? true : false}
+         />
       </div>
    );
 };
