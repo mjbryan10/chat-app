@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from 'testing-utils';
 import ConversationItem from '..';
-import { Conversation } from 'shared/Api/@types';
+import { Conversation } from 'shared/Api/types';
 import axios from 'axios';
 import { Provider } from 'react-redux';
 import { store } from 'app/store';

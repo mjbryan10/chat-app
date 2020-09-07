@@ -1,6 +1,6 @@
 import BaseApi from './BaseApi';
 import axios, { AxiosResponse } from 'axios';
-import { Conversation, ApiPostResponse } from './@types';
+import { Conversation, ApiPostResponse } from './types';
 
 export default class ConversationApi extends BaseApi {
    async fetchConversationsByUserId(

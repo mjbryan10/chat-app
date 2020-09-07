@@ -1,5 +1,5 @@
 import styled, { ThemeProps, Theme } from 'styled-components';
-import { SpectrumColor } from 'shared/theme/@types';
+import { SpectrumColor } from 'shared/theme/types';
 
 interface ButtonProps extends ThemeProps<Theme> {
   selected: boolean;

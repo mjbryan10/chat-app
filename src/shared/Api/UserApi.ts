@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import BaseApi from './BaseApi';
-import { User, LoginResponse } from './@types';
+import { User, LoginResponse } from './types';
 
 export default class UserApi extends BaseApi {
    /**

@@ -13,7 +13,7 @@ import {
    selectCurrentConversationId,
    selectCurrentConversation,
 } from 'features/conversation/conversationSlice';
-import { colorSpectrumArray } from 'shared/Types/theme.types';
+import { colorSpectrumArray } from 'shared/theme/types';
 import UserApi from 'shared/Api/UserApi';
 import MessageCreator from '../MessageCreator';
 import MessageApi from 'shared/Api/MessageApi';

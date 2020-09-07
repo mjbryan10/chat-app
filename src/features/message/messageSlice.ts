@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { Message, NewMessagesResponse } from '../../shared/Api/@types';
+import { Message, NewMessagesResponse } from '../../shared/Api/types';
 import MessageApi from '../../shared/Api/MessageApi';
 import moment from 'moment';
-import { SpectrumColor } from 'shared/Types/theme.types';
+import { SpectrumColor } from 'shared/theme/types';
 
 /**
  * The arguments passed to the payLoadCreator for fetchNewMessages

@@ -1,4 +1,4 @@
-import { ThemeColors } from './@types';
+import { ThemeColors } from './types';
 
 // const colors: ThemeColors = {
 //    primary: '#F83600',

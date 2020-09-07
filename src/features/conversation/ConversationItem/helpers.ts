@@ -1,4 +1,4 @@
-import { Conversation } from "shared/Api/@types";
+import { Conversation } from "shared/Api/types";
 import UserApi from "shared/Api/UserApi";
 
 /**

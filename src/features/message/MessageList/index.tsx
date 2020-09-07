@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Message } from 'shared/Api/@types';
+import { Message } from 'shared/Api/types';
 import { Participant } from '../messageSlice';
 import MessageItem from '../MessageItem';
 import * as S from './styles';

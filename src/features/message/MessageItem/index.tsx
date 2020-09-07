@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import * as S from './styles';
-import { Message } from 'shared/Api/@types';
+import { Message } from 'shared/Api/types';
 import { Participant } from '../messageSlice';
 import moment from 'moment';
 

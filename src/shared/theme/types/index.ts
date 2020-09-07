@@ -11,14 +11,14 @@ class ColorSpectrumList {
     */
    constructor(
       readonly blue?: string,
-      readonly indigo?: string,
-      readonly purple?: string,
-      readonly pink?: string,
       readonly red?: string,
-      readonly orange?: string,
-      readonly yellow?: string,
       readonly green?: string,
+      readonly purple?: string,
+      readonly orange?: string,
+      readonly pink?: string,
+      readonly indigo?: string,
       readonly teal?: string,
+      readonly yellow?: string,
       readonly cyan?: string,
    ){}
 }

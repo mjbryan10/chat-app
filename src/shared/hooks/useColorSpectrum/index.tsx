@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { colorSpectrumArray, SpectrumColor } from 'shared/theme/@types';
+import { colorSpectrumArray, SpectrumColor } from 'shared/theme/types';
 
 
 //TODO: Decide if this is needed?
