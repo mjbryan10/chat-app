@@ -1,34 +1,35 @@
 import React, { FC } from 'react';
 import * as S from './styles';
-import { ThemeColor } from 'styled-components';
-// import UserApi from 'Api/UserApi';
-export interface Props {
-   messageText: string;
-   username: string;
+import { Message } from 'shared/Api/@types';
+import { Participant } from '../messageSlice';
+import moment from 'moment';
+
+interface Props {
+   messageDetails: Message;
+   userDetails: Participant;
    isChainMessage?: boolean;
-   color: ThemeColor;
-   time: string;
 }
 
 /**
  * A React Function Component responsible for rendering a message from the chat API.
- * @param message A message object from the API
+ * @param messageDetails A message object from the API, containing details of message
+ * @param userDetails Participants information, fetched from API using senderId
  * @param isChaind A `boolean` to indicate if the message is part of a chain
  */
 const MessageItem: FC<Props> = ({
-   messageText,
-   username,
+   messageDetails,
+   userDetails,
    isChainMessage = false,
-   color,
-   time,
 }) => {
    return (
-      <S.Container color={color} isChained={isChainMessage}>
+      <S.Container color={userDetails.color} isChained={isChainMessage}>
          <S.Header>
-            <S.Detail>{username}</S.Detail>
-            <S.Detail>{time}</S.Detail>
+            <S.Detail>{userDetails.name}</S.Detail>
+            <S.Detail>
+               {moment(messageDetails.timestamp, 'YYYY-MM-DD HH:mm:ss').format('hh:mm')}
+            </S.Detail>
          </S.Header>
-         <S.Body>{messageText}</S.Body>
+         <S.Body>{messageDetails.message}</S.Body>
       </S.Container>
    );
 };

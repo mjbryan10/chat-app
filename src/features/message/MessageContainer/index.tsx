@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { Message } from 'Api/@types';
-import useFetchUsernameById from 'hooks/useFetchUsernameById';
+import { Message } from 'shared/Api/@types';
+import useFetchUsernameById from 'shared/hooks/useFetchUsernameById';
 import MessageItem from '../MessageItem';
 import moment from 'moment';
-import { ThemeColor } from 'theme/@types';
+import { ThemeColor } from 'shared/theme/@types';
 
 
 interface Props {
