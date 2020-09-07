@@ -18,8 +18,8 @@ interface FetchNewMessagesArgs {
  */
 interface fetchLimitedMessagesArgs {
    conversationId: number;
-   limit: number;
-   offset: number;
+   limit?: number;
+   offset?: number;
 }
 /**
  * A helper type-guard function that validates if the NewMessagesResponse interface
@@ -95,7 +95,7 @@ export const fetchNewMessages = createAsyncThunk(
  */
 export const fetchOlderMessages = createAsyncThunk(
    'message/fetchOlderMessages',
-   async ({ conversationId, limit = 10, offset }: fetchLimitedMessagesArgs) => {
+   async ({ conversationId, limit = 10, offset = 0 }: fetchLimitedMessagesArgs) => {
       return messageApi.fetchLimitedMessages(conversationId, limit, offset);
    }
 );

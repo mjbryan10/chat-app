@@ -16,7 +16,7 @@ const MessageList: FC<Props> = ({ messages, participants }) => {
          {messages.map((message, index) => {
             const participant = participants.find((user) => user.id === message.senderId);
             if (participant) {
-               const isChain = message.senderId === messages[index + 1].senderId;
+               const isChain = message.senderId === messages[index + 1]?.senderId || false;
                return (
                   <MessageItem
                      key={message.id}

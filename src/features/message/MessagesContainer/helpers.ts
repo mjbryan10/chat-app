@@ -1,7 +1,7 @@
-import { Message } from "shared/Api/@types";
-import { colorSpectrumArray } from "shared/theme/@types";
-import UserApi from "shared/Api/UserApi";
-import { Participant } from "../messageSlice";
+import { Message, ConversationUser } from 'shared/Api/@types';
+import { colorSpectrumArray } from 'shared/theme/@types';
+import UserApi from 'shared/Api/UserApi';
+import { Participant } from '../messageSlice';
 
 /**
  * A function for gathering and generating information relating to each user
@@ -31,27 +31,49 @@ export const generateParticipants = (
       colorsIndex = colors.findIndex((color) => color === lastColorUsed) + 1;
    }
    const userApi = new UserApi();
+   let result: Participant[] = [];
    messages.forEach((message) => {
-      if (!participants.filter((user) => user.id === message.senderId).length) {
-         let username = 'Anonymous';
+      if (!result.filter((participant) => participant.id === message.senderId).length) {
+         //  let username = 'Anonymous';
+         const newParticipant = {
+            id: message.senderId,
+            name: 'Anonymous',
+            color: colors[colorsIndex] || colors[0],
+            isOwner: message.senderId === currentUserId,
+         };
+         result.push(newParticipant);
          userApi
             .fetchUserNameById(message.senderId)
-            .then((result) => {
-               username = result; //Change username if appropiate.
+            .then((res) => {
+               console.log('res', res);
+               newParticipant.name = res; //Change username if appropiate.
             })
-            .finally(() => {
-               const newParticipant = {
-                  id: message.senderId,
-                  name: username,
-                  color: colors[colorsIndex] || colors[0],
-                  isOwner: message.senderId === currentUserId,
-               };
-               participants.push(newParticipant);
+            // .catch((error) => {
+            //    console.error(error)
+            //    result.push(newParticipant)
 
-               colorsIndex >= colors.length ? (colorsIndex = 0) : colorsIndex++;
+            //   })
+            .finally(() => {
                //cycle to next available color (index)
             });
+         colorsIndex >= colors.length ? (colorsIndex = 0) : colorsIndex++;
       }
    });
-   return participants;
+   return result;
+};
+
+const usersToParticipants = (users: ConversationUser[], currentUserId: number) => {
+   const userApi = new UserApi();
+   const colors = colorSpectrumArray;
+   let colorsIndex = -1;
+   const participants = users.map((user) => {
+      colorsIndex++;
+      if (colorsIndex >= colors.length) colorsIndex = 0;
+      const participant = userApi.fetchUserNameById(user.userid).then((result) => {
+         return { ...user, color: colors[colorsIndex], name: result };
+      });
+      console.log('MessagesContainer -> participant', participant);
+      return participant;
+    });
+    return participants;
 };
