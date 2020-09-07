@@ -1,5 +1,5 @@
-import { Conversation } from "Api/@types";
-import UserApi from "Api/UserApi";
+import { Conversation } from "shared/Api/@types";
+import UserApi from "shared/Api/UserApi";
 
 /**
  * Returns the conversation name if it is recorded.

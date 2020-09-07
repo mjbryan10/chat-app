@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { Conversation } from '../../Api/@types';
-import ConversationApi from '../../Api/ConversationApi';
+import { Conversation } from '../../shared/Api/@types';
+import ConversationApi from '../../shared/Api/ConversationApi';
 import moment from 'moment';
 
 type LoadingStatus = 'rejected' | 'pending' | 'fulfilled';

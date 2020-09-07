@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { User } from '../../Api/@types';
-import UserApi from '../../Api/UserApi';
+import { User } from '../../shared/Api/@types';
+import UserApi from '../../shared/Api/UserApi';
 
 interface loginState {
    id: number | null;

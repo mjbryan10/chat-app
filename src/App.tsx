@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
-import { dark, light } from './theme';
+import { dark, light } from './shared/theme';
 import Login from './features/login/Login';
 import { selectLogin } from './features/login/loginSlice';
 import { selectTheme } from './features/theme/themeSlice';

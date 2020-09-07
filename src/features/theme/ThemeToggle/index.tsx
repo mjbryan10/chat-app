@@ -3,7 +3,7 @@ import * as S from './styles';
 import { selectTheme, toggleTheme, setTheme } from '../themeSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
-import { isThemeName } from '../../../theme/@types';
+import { isThemeName } from '../../../shared/theme/@types';
 
 const ThemeToggle = () => {
    const currentTheme = useSelector(selectTheme);

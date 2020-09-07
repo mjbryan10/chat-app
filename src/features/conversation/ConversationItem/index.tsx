@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, FC, useMemo, useEffect, useState } from 'react';
 import * as S from './styles';
 import AvatarWithLabel from 'components/AvatarWithLabel';
-import { Conversation } from 'Api/@types';
+import { Conversation } from 'shared/Api/@types';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectLogin } from 'features/login/loginSlice';
 import {

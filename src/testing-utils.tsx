@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
-import { dark } from './theme';
+import { dark } from './shared/theme';
 
 const AllTheProviders = ({ children }: any) => {
   return (
