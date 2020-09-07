@@ -3,8 +3,7 @@ import { RootState } from '../../app/store';
 import { Message, NewMessagesResponse } from '../../shared/Api/@types';
 import MessageApi from '../../shared/Api/MessageApi';
 import moment from 'moment';
-import { SpectrumColor, colorSpectrumArray } from 'shared/theme/@types';
-import UserApi from 'shared/Api/UserApi';
+import { SpectrumColor } from 'shared/theme/@types';
 
 /**
  * The arguments passed to the payLoadCreator for fetchNewMessages
@@ -21,6 +20,12 @@ interface fetchLimitedMessagesArgs {
    limit?: number;
    offset?: number;
 }
+export interface Participant {
+   id: number;
+   name: string;
+   color: SpectrumColor;
+   isOwner: boolean;
+}
 /**
  * A helper type-guard function that validates if the NewMessagesResponse interface
  * is a `Message[]` or `{message: string}`
@@ -32,12 +37,6 @@ function hasNewMessages(apiResponse: NewMessagesResponse): apiResponse is Messag
    return Array.isArray(apiResponse as Message[]);
 }
 
-export interface Participant {
-   id: number;
-   name: string;
-   color: SpectrumColor;
-   isOwner: boolean;
-}
 /**
  * String values available to the loading status.
  */
@@ -49,7 +48,6 @@ interface messageState {
    messages: Message[];
    status: LoadingStatus;
    lastUpdated: number;
-   participants: Participant[];
 }
 
 /**
@@ -59,7 +57,6 @@ const initialState: messageState = {
    messages: [],
    status: 'pending',
    lastUpdated: Date.now(),
-   participants: [],
 };
 
 /**
@@ -120,12 +117,6 @@ export const messageSlice = createSlice({
    name: 'message',
    initialState,
    reducers: {
-      setParticipants(state, action) {
-         state.participants = action.payload;
-      },
-      clearParticipants(state) {
-         state.participants = [];
-      },
    },
    extraReducers: (builder) => {
       builder
@@ -180,15 +171,6 @@ export const messageSlice = createSlice({
    },
 });
 
-/**
- * Exported actions generated from the createSlice reducers field.
- */
-export const { setParticipants, clearParticipants } = messageSlice.actions;
-/**
- * Returns the current participants of the current conversation.
- * @param state The current Root State
- */
-export const selectParticipants = (state: RootState) => state.message.participants;
 /**
  * Returns the current messages in the store
  * @param state The current Root State
