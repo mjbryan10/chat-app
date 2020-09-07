@@ -14,7 +14,7 @@ interface Props {
  * A React Function Component responsible for rendering a message from the chat API.
  * @param messageDetails A message object from the API, containing details of message
  * @param userDetails Participants information, fetched from API using senderId
- * @param isChaind A `boolean` to indicate if the message is part of a chain
+ * @param isChainMessage A `boolean` to indicate if the message is part of a chain
  */
 const MessageItem: FC<Props> = ({
    messageDetails,

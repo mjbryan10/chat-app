@@ -2,6 +2,7 @@ import React from 'react';
 import { render, RenderResult } from 'testing-utils';
 import MessageItem from '..';
 import { cleanup } from '@testing-library/react';
+import { Participant } from 'features/message/messageSlice';
 
 jest.mock('axios');
 
@@ -14,17 +15,16 @@ describe('MessageItem Component', () => {
       conversationid: 2,
       status: 0,
    };
+   const testUser: Participant = {
+      id: 1,
+      name: 'Wessel',
+      color: 'red',
+      isOwner: true,
+   };
    let utils: RenderResult;
    describe('MessageItem intial render', () => {
       beforeEach(() => {
-         utils = render(
-            <MessageItem
-               messageText={testMessage.message}
-               username="Wessel"
-               color="owner"
-               time="08:15"
-            />
-         );
+         utils = render(<MessageItem messageDetails={testMessage} userDetails={testUser} />);
       });
       afterEach(() => {
          jest.resetAllMocks();
