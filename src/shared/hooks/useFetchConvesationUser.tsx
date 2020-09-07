@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import UserApi from 'shared/Api/UserApi';
-import { ConversationUser } from 'shared/Api/@types';
-import { useSelector, useDispatch } from 'react-redux';
 
 type Status = 'idle' | 'fulfilled' | 'pending';
 
@@ -13,43 +11,29 @@ type Status = 'idle' | 'fulfilled' | 'pending';
  * @param id The user id, of which to retreive the name of.
  * @param initialValue The intial name value, optional.
  */
-const useFetchUsernameById = (
-   id: number,
-): [string, string, null | string] => {
-   const [user, setUser] = useState<null | ConversationUser>(null);
-   const [error, setError] = useState<null | string>(null);
+const useFetchUsernameById = (id: number): [string, string, null | string] => {
+   const [user, setUser] = useState<string>('');
+   const [error, setError] = useState<string>('');
    const [status, setStatus] = useState<Status>('idle');
 
-   const participants = useSelector(selectParticipants)
-   const dispatch = useDispatch();
    useEffect(() => {
-      const userFromStore = participants.filter((user) => user.id === id);
-      if (userFromStore) {
-         setUser(userFromStore.name);
-         setError('');
-         setStatus('fulfilled');
-      } else {
+      if (id) {
          const userApi = new UserApi();
-         setStatus('loading');
-         setError(null);
+         setStatus('pending');
+         setError('');
          userApi
             .fetchUserNameById(id)
             .then((result) => {
-               const userDetails = {
-                  name: result,
-                  
-               }
-               setUser(userDetails);
-               dispatch(addUserToParticipants(userDetails))
+               setUser(result);
             })
-            .catch((error) => {
+            .catch(() => {
                setError('Unable to fetch user name from the server.');
             })
             .finally(() => {
                setStatus('fulfilled');
             });
       }
-   }, [dispatch, id, participants]);
+   }, [id]);
 
    return [user, status, error];
 };
