@@ -136,7 +136,7 @@ export const conversationSlice = createSlice({
          })
          .addCase(fetchConversations.rejected, (state, action) => {
             state.status = 'rejected';
-         });
+         })
    },
 });
 
