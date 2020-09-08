@@ -26,7 +26,7 @@ const MessageItem: FC<Props> = ({
    return (
       <S.Container color={color} isChained={isChainMessage} isOwner={isOwner}>
          <S.Header color={color}>
-            <S.Detail>{name}</S.Detail>
+            <S.Detail>{isOwner ? 'You' : name}</S.Detail>
             <S.Detail>
                {moment(timestamp, 'YYYY-MM-DD HH:mm:ss').format('hh:mm')}
             </S.Detail>
