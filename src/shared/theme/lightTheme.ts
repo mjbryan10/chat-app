@@ -14,9 +14,9 @@ const lightTheme: Theme = {
       rgba(248, 54, 0, 1) 100%
    )`,
       inputField: '#DBDBDB',
-      conversation: 'linear-gradient(180deg, rgba(78,83,88,1) 0%, rgba(66,71,77,1) 100%)',
+      conversation: 'linear-gradient(180deg, rgba(230, 234, 238, 1) 0%, rgba(208, 211, 214 ,1) 100%)',
       conversationSelected:
-         'linear-gradient(180deg, rgba(78,83,88,1) 0%, rgba(66,71,77,1) 100%)',
+      'linear-gradient(180deg, rgba(230, 234, 238, 1) 100%, rgba(208, 211, 214 ,1) 0%)',
       message: '#e6eaee',
       // messagesDisplay: 'linear-gradient(180deg, #4E5358 0%, #42474D 100%)',
       messagesDisplay: backgroundPattern,

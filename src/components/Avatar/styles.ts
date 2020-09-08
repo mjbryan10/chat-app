@@ -10,8 +10,8 @@ interface OuterContainer extends BaseProps {
 
 export const Container = styled.div<OuterContainer>`
    border: ${({ theme }) => theme.border ?? 'inherit'};
-   max-width: ${({ size }) => size}px;
-   max-height: ${({ size }) => size}px;
+   min-width: ${({ size }) => size}px;
+   min-height: ${({ size }) => size}px;
    display: flex;
    justify-content: center;
    align-items: center;
