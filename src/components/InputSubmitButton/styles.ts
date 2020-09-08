@@ -5,9 +5,12 @@ export const Input = styled.input`
    background: ${({ theme: { background } }: ThemeProps<Theme>) =>
       background.buttonPrimary ?? 'inherit'};
    border: ${({ theme }: ThemeProps<Theme>) => theme.border};
-   padding: 1em;
+   padding: 1em 3em;
    margin: 0 0.3rem;
    text-transform: uppercase;
+   color: white;
+   /* font-weight: bold; */
+   text-shadow: 0px 0px 5px rgba(0,0,0,0.3);
    &:hover {
       cursor: pointer;
    }

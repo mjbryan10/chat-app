@@ -19,6 +19,7 @@ import UserApi from 'shared/Api/UserApi';
 import MessageCreator from '../MessageCreator';
 import MessageApi from 'shared/Api/MessageApi';
 import * as S from './styles';
+import { ThemeColor } from 'styled-components';
 
 const MessagesContainer = () => {
    //REDUX:
@@ -78,15 +79,17 @@ const MessagesContainer = () => {
       if (currentConversation) {
          const userApi = new UserApi();
          const colors = colorSpectrumArray;
-         let colorsIndex = -1;
+         let colorsIndex = 0;
          currentConversation.users.forEach((user) => {
-            colorsIndex++;
+            const isOwner = user.userid === currentUser.id;
+            const color: ThemeColor = (isOwner) ? "owner" : colors[colorsIndex]
+            if (!isOwner) colorsIndex++;
             if (colorsIndex >= colors.length) colorsIndex = 0;
             const newParticipant = {
                id: user.userid,
                name: 'Anonymous',
-               color: colors[colorsIndex],
-               isOwner: user.userid === currentUser.id,
+               color,
+               isOwner,
             };
             userApi
                .fetchUserNameById(user.userid)
