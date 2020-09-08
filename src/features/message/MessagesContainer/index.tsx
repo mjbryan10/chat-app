@@ -36,33 +36,32 @@ const MessagesContainer = () => {
       if (conversationId) dispatch(fetchConversationMessages({ conversationId }));
    }, [conversationId, dispatch]);
 
-   
    /**
     * Systematic message updating
-    * 
+    *
     * Polls the database for new messages at every interval.
     */
    useEffect(() => {
       //TODO: Uncomment
-   //    const retreiveMessages = () => {
-   //    if (conversationId && messages.length) {
-   //       dispatch(
-   //          fetchNewMessages({
-   //             conversationId,
-   //             lastMessageId: messages[messages.length - 1].id,
-   //          })
-   //       );
-   //    } else if (conversationId) {
-   //       dispatch(fetchConversationMessages({ conversationId }));
-   //    }
-   // };
-   //    const refreshMessages = setInterval(() => {
-   //       console.log('refreshed');
-   //          retreiveMessages();
-   //    }, 5000);
-   //    return () => {
-   //       clearInterval(refreshMessages);
-   //    };
+      //    const retreiveMessages = () => {
+      //    if (conversationId && messages.length) {
+      //       dispatch(
+      //          fetchNewMessages({
+      //             conversationId,
+      //             lastMessageId: messages[messages.length - 1].id,
+      //          })
+      //       );
+      //    } else if (conversationId) {
+      //       dispatch(fetchConversationMessages({ conversationId }));
+      //    }
+      // };
+      //    const refreshMessages = setInterval(() => {
+      //       console.log('refreshed');
+      //          retreiveMessages();
+      //    }, 5000);
+      //    return () => {
+      //       clearInterval(refreshMessages);
+      //    };
    }, [conversationId, dispatch, messages]);
 
    /**
@@ -135,11 +134,7 @@ const MessagesContainer = () => {
     * i.e. if there isn't the information availalbe to make a valid message post.
     */
    const isDisabled =
-      Boolean(conversationId) &&
-      Boolean(currentUser.id) &&
-      Boolean(currentUser.isAuthenticated)
-         ? false
-         : true;
+      conversationId && currentUser.id && currentUser.isAuthenticated ? false : true;
 
    return (
       <div>
