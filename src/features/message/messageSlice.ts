@@ -3,7 +3,7 @@ import { RootState, LoadingStatus } from '../../app/store';
 import { Message, NewMessagesResponse } from '../../shared/Api/types';
 import MessageApi from '../../shared/Api/MessageApi';
 import moment from 'moment';
-import { SpectrumColor } from 'shared/theme/types';
+import { ThemeColor } from 'shared/theme/types';
 
 
 //TYPES:
@@ -26,7 +26,7 @@ interface fetchLimitedMessagesArgs {
 export interface Participant {
    id: number;
    name: string;
-   color: SpectrumColor;
+   color: ThemeColor;
    isOwner: boolean;
 }
 /**
