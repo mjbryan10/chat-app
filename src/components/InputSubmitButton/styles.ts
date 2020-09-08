@@ -10,4 +10,7 @@ export const Input = styled.input`
    &:hover {
       cursor: pointer;
    }
+   &:disabled {
+      cursor: auto;
+   }
 `;
