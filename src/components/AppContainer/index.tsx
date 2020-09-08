@@ -1,12 +1,12 @@
 import React from 'react';
 import * as S from './styles';
 import MessagesContainer from 'features/message/MessagesContainer';
-import ConversationList from 'features/conversation/ConversationList';
+import ConversationContainer from 'features/conversation/ConversationContainer';
 
 const AppContainer = () => {
   return (
     <S.Container>
-      <ConversationList />
+      <ConversationContainer />
       <MessagesContainer />
     </S.Container>
   )
