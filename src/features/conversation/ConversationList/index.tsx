@@ -9,7 +9,7 @@ import {
 } from '../conversationSlice';
 import ConversationItem from '../ConversationItem';
 import { selectLogin } from 'features/login/loginSlice';
-// import { colorSpectrumArray } from 'theme/@types';
+import { colorSpectrumArray } from 'shared/theme/types';
 
 const ConversationList = () => {
    const conversations = useSelector(selectConversations);
@@ -25,10 +25,9 @@ const ConversationList = () => {
       };
    }, [currentUserId, dispatch]);
 
-   //TODO: Pass color onto ConversationItem without causes re-render crash
-   // const colors = colorSpectrumArray; 
-   // let colorIndex = -1;
 
+   const colors = colorSpectrumArray;
+   let colorIndex = -1;
    return (
       <S.Container>
          <S.Header>Conversations</S.Header>
@@ -36,12 +35,12 @@ const ConversationList = () => {
          {currentUserId
             ? conversations.map((conversation) => {
                  const { conversationId } = conversation.conversation;
-               // colorIndex++
-               // if (colorIndex >= colors.length) colorIndex = 0;
+                 colorIndex++;
                  return (
                     <ConversationItem
                        conversation={conversation}
                        key={conversationId}
+                       color={colors[colorIndex]}
                     />
                  );
               })
