@@ -3,7 +3,7 @@ import { RootState, LoadingStatus } from '../../app/store';
 import { Message, NewMessagesResponse } from '../../shared/Api/types';
 import MessageApi from '../../shared/Api/MessageApi';
 import moment from 'moment';
-import { ThemeColor } from '../conversation/ConversationContainer/node_modules/shared/theme/types';
+import { ThemeColor } from '../../shared/theme/types';
 
 
 //TYPES:
