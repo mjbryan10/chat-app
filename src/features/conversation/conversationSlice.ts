@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
+import { RootState, LoadingStatus } from '../../app/store';
 import { Conversation } from '../../shared/Api/types';
 import ConversationApi from '../../shared/Api/ConversationApi';
 import moment from 'moment';
 
-type LoadingStatus = 'rejected' | 'pending' | 'fulfilled';
+
 
 interface conversationState {
    conversations: Conversation[];
@@ -149,7 +149,7 @@ export const {
 export const selectConversations = (state: RootState) => state.conversation.conversations;
 export const selectCurrentConversation = (state: RootState) =>
    state.conversation.currentConversation;
-export const selectCurrentConversationId = (state: RootState) =>
+export const selectCurrentConversationId = (state: RootState): number | null =>
    state.conversation.currentConversationId;
 export const selectConversationStatus = (state: RootState) => state.conversation.status;
 export default conversationSlice.reducer;
