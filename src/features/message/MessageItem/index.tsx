@@ -22,7 +22,7 @@ const MessageItem: FC<Props> = ({
    isChainMessage = false,
 }) => {
    return (
-      <S.Container color={userDetails.color} isChained={isChainMessage}>
+      <S.Container color={userDetails.color} isChained={isChainMessage} isOwner={userDetails.isOwner}>
          <S.Header>
             <S.Detail>{userDetails.name}</S.Detail>
             <S.Detail>

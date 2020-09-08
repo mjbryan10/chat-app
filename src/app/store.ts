@@ -22,3 +22,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
+
+/**
+ * String values available to the loading status.
+ */
+export type LoadingStatus = 'rejected' | 'pending' | 'fulfilled' | 'idle';

@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
-import { Message } from 'shared/Api/types';
 import { Participant } from '../messageSlice';
 import MessageItem from '../MessageItem';
 import * as S from './styles';
-import Spinner from 'components/Spinner';
+import { Message } from 'shared/Api/types';
 
 interface Props {
    messages: Message[];
@@ -26,7 +25,7 @@ const MessageList: FC<Props> = ({ messages, participants }) => {
                   />
                );
             }
-            return <Spinner />; 
+            return <p>Trouble loading message, try again later.</p>; 
          })}
       </S.Wrapper>
    );

@@ -10,4 +10,5 @@ export const Container = styled.div`
 export const Header = styled.h2<ThemeProps<Theme>>`
   text-transform: uppercase;
   color: ${({theme}) => theme.color.text ?? 'inherit'};
+  margin: 1rem auto;
 `;

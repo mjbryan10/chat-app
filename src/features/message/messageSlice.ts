@@ -1,9 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
+import { RootState, LoadingStatus } from '../../app/store';
 import { Message, NewMessagesResponse } from '../../shared/Api/types';
 import MessageApi from '../../shared/Api/MessageApi';
 import moment from 'moment';
 import { SpectrumColor } from 'shared/theme/types';
+
+
+//TYPES:
 
 /**
  * The arguments passed to the payLoadCreator for fetchNewMessages
@@ -27,21 +30,6 @@ export interface Participant {
    isOwner: boolean;
 }
 /**
- * A helper type-guard function that validates if the NewMessagesResponse interface
- * is a `Message[]` or `{message: string}`
- *
- * @returns True if of type `Message[]`
- * @param apiResponse NewMessagesResponse from the API
- */
-function hasNewMessages(apiResponse: NewMessagesResponse): apiResponse is Message[] {
-   return Array.isArray(apiResponse as Message[]);
-}
-
-/**
- * String values available to the loading status.
- */
-type LoadingStatus = 'rejected' | 'pending' | 'fulfilled';
-/**
  * Interface for the messageSlice state
  */
 interface messageState {
@@ -55,9 +43,42 @@ interface messageState {
  */
 const initialState: messageState = {
    messages: [],
-   status: 'pending',
+   status: 'idle',
    lastUpdated: Date.now(),
 };
+
+//HELPERS:
+
+/**
+ * A helper type-guard function that validates if the NewMessagesResponse interface
+ * is a `Message[]` or `{message: string}`
+ *
+ * @returns True if of type `Message[]`
+ * @param apiResponse NewMessagesResponse from the API
+ */
+function hasNewMessages(apiResponse: NewMessagesResponse): apiResponse is Message[] {
+   return Array.isArray(apiResponse as Message[]);
+}
+/**
+ * A helper function that converts the API timestamp format into a number value
+ * for comparison use.
+ * 
+ * @param timestamp A timestamp string value, in YYYY-MM-DD HH:mm:ss format
+ */
+const timestampToValue = (timestamp: string): number => {
+   return moment(timestamp, 'YYYY-MM-DD HH:mm:ss').valueOf();
+}
+/**
+ * Helper function that sorts an array of messages chronologically by its timestamp.
+ * 
+ * @param messages The array of messages which needs to be chronologically sorted
+ */
+const sortMessages = (messages: Message[]): Message[] => {
+   return messages.sort((a,b) => timestampToValue(a.timestamp) - timestampToValue(b.timestamp) ) 
+}
+
+
+//ASYNC ACTIONS:
 
 /**
  * conversationApi for communicating with backend.
@@ -109,6 +130,9 @@ export const fetchConversationMessages = createAsyncThunk(
    }
 );
 
+
+//SLICE:
+
 /**
  * Redux Toolkit slice responsible for creating actions and reducers for message
  * field of the redux store.
@@ -126,7 +150,8 @@ export const messageSlice = createSlice({
             const now = moment().valueOf();
 
             if (status === 200 && Array.isArray(data) && state.lastUpdated < now) {
-               state.messages = [...state.messages, ...data];
+               const sortedData = sortMessages(data);
+               state.messages = [...state.messages, ...sortedData];
                state.status = 'fulfilled';
                state.lastUpdated = now;
             }
@@ -142,9 +167,10 @@ export const messageSlice = createSlice({
          .addCase(fetchOlderMessages.fulfilled, (state, action) => {
             const { data, status } = action.payload;
             if (status === 200) {
-               state.messages = [...data, ...state.messages];
-               state.status = 'fulfilled';
+               const sortedData = sortMessages(data);
+               state.messages = [...sortedData, ...state.messages];
             }
+            state.status = 'fulfilled';
          })
          .addCase(fetchOlderMessages.pending, (state, action) => {
             state.status = 'pending';
@@ -157,9 +183,11 @@ export const messageSlice = createSlice({
          .addCase(fetchConversationMessages.fulfilled, (state, action) => {
             const { data, status } = action.payload;
             if (status === 200) {
-               state.messages = data;
-               state.status = 'fulfilled';
+               const sortedData = sortMessages(data);
+               state.messages = sortedData;
+               console.log('data', data);
             }
+            state.status = 'fulfilled';
          })
          .addCase(fetchConversationMessages.pending, (state, action) => {
             state.messages = [];
@@ -171,6 +199,8 @@ export const messageSlice = createSlice({
    },
 });
 
+//EXPORTS:
+
 /**
  * Returns the current messages in the store
  * @param state The current Root State
@@ -180,6 +210,6 @@ export const selectMessages = (state: RootState) => state.message.messages;
  * Returns the current message loading status
  * @param state The current Root State
  */
-export const selectMessageLoadingStatus = (state: RootState) => state.message.status;
+export const selectMessageLoadingStatus = (state: RootState):LoadingStatus  => state.message.status;
 
 export default messageSlice.reducer;

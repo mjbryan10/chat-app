@@ -10,10 +10,10 @@ import { colorSpectrumArray, SpectrumColor } from 'shared/theme/types';
  *
  * First value in array is the cu
  */
-const useColorSpectrum = (): [() => SpectrumColor, ()=> void] => {
+const useColorSpectrum = (): [() => SpectrumColor] => {
    const colors = colorSpectrumArray;
 
-   const [index, setColorIndex] = useState(-1);
+   const [index, setColorIndex] = useState(0);
 
    const incrementIndex = () => {
       const newValue = index >= colors.length - 1 ? 0 : index + 1;
@@ -21,10 +21,12 @@ const useColorSpectrum = (): [() => SpectrumColor, ()=> void] => {
    };
 
    const fetchColor = () => {
-     return colors[index] || colors[0];
+      const color = colors[index];
+      incrementIndex();
+     return color;
    }
 
-   return [fetchColor, incrementIndex];
+   return [fetchColor];
 };
 
 export default useColorSpectrum;

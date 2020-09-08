@@ -7,7 +7,11 @@ export const Input = styled.input`
    border: ${({ theme }: ThemeProps<Theme>) => theme.border};
    padding: 1em;
    margin: 0 0.3rem;
+   text-transform: uppercase;
    &:hover {
       cursor: pointer;
+   }
+   &:disabled {
+      cursor: auto;
    }
 `;
