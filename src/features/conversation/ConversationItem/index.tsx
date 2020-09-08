@@ -9,9 +9,11 @@ import {
    setCurrentConversation,
 } from '../conversationSlice';
 import { isSelectedConversation, computeConversationName } from './helpers';
+import { SpectrumColor } from 'shared/theme/types';
 
 interface Props {
    conversation: Conversation;
+   color: SpectrumColor
 }
 /**
  * A React functional component for rendering a conversation option.
@@ -20,7 +22,7 @@ interface Props {
  * the Redux store.
  * @param conversation The conversation to which this card item relates to.
  */
-const ConversationItem: FC<Props> = ({ conversation }) => {
+const ConversationItem: FC<Props> = ({ conversation, color }) => {
    const { id: currentUserId } = useSelector(selectLogin);
    const currentConversationId = useSelector(selectCurrentConversationId);
    const dispatch = useDispatch();
@@ -65,8 +67,9 @@ const ConversationItem: FC<Props> = ({ conversation }) => {
          selected={selected}
          onClick={onClick}
          data-testid="conversation-item-button"
+         color={color}
       >
-         <AvatarWithLabel title={conversationName} key={id}  />
+         <AvatarWithLabel title={conversationName} key={id} color={color}  />
       </S.ItemButton>
    );
 };

@@ -27,7 +27,7 @@ export const Container = styled.div<Props>`
       background: ${colorOrOwner};
       margin: -1.5px -1.5px -10px -1.5px;
       ${({ isOwner }) => (isOwner ? 'transform: rotateY(180deg);' : null)}
-      ${({isChained}) => isChained ? 'display: none;' : null}}
+      ${({isChained}) => isChained ? 'display: none;' : null}
    }
    
 `;

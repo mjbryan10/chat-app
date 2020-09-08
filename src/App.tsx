@@ -5,10 +5,9 @@ import { dark, light } from './shared/theme';
 import Login from './features/login/Login';
 import { selectLogin } from './features/login/loginSlice';
 import { selectTheme } from './features/theme/themeSlice';
-import ThemeToggle from './features/theme/ThemeToggle';
-import Avatar from 'components/Avatar';
-import ConversationList from 'features/conversation/ConversationList';
-import MessagesContainer from 'features/message/MessagesContainer';
+import Navigation from 'components/Navigation';
+import GlobalStyles from 'shared/styles/GlobalStyles';
+import AppContainer from 'components/AppContainer';
 
 function App() {
    const { isAuthenticated } = useSelector(selectLogin);
@@ -16,8 +15,9 @@ function App() {
 
    return (
          <ThemeProvider theme={(theme === 'dark') ? dark : light}>
-            {isAuthenticated ? <div><ConversationList /><MessagesContainer /></div> : <Login />}
-            <ThemeToggle />
+            <GlobalStyles />
+            <Navigation />
+            {isAuthenticated ? <AppContainer /> : <Login />}
          </ThemeProvider>
    );
 }

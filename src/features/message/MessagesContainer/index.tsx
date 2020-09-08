@@ -18,6 +18,7 @@ import { colorSpectrumArray } from 'shared/theme/types';
 import UserApi from 'shared/Api/UserApi';
 import MessageCreator from '../MessageCreator';
 import MessageApi from 'shared/Api/MessageApi';
+import * as S from './styles';
 
 const MessagesContainer = () => {
    //REDUX:
@@ -137,16 +138,17 @@ const MessagesContainer = () => {
       conversationId && currentUser.id && currentUser.isAuthenticated ? false : true;
 
    return (
-      <div>
-         {messages.length && participants.length ? (
-            <MessageList messages={messages} participants={participants} />
-         ) : loadingStatus !== 'idle' ? (
-            <p>No messages yet.</p>
-         ) : null}
-         {loadingStatus === 'pending' ? <Spinner /> : null}
-
+      <S.Container>
+         <S.MessagesDisplay>
+            {messages.length && participants.length ? (
+               <MessageList messages={messages} participants={participants} />
+            ) : loadingStatus !== 'idle' ? (
+               <p>No messages yet.</p>
+            ) : null}
+            {loadingStatus === 'pending' ? <Spinner /> : null}
+         </S.MessagesDisplay>
          <MessageCreator handleSubmit={onMessagePost} disabled={isDisabled} />
-      </div>
+      </S.Container>
    );
 };
 
