@@ -5,6 +5,7 @@ import {
    fetchConversationMessages,
    Participant,
    fetchNewMessages,
+   selectMessageLoadingStatus,
 } from '../messageSlice';
 import { selectLogin } from 'features/login/loginSlice';
 import MessageList from '../MessageList';
@@ -24,6 +25,7 @@ const MessagesContainer = () => {
    const currentUser = useSelector(selectLogin);
    const currentConversation = useSelector(selectCurrentConversation);
    const conversationId = useSelector(selectCurrentConversationId);
+   const loadingStatus = useSelector(selectMessageLoadingStatus);
    const dispatch = useDispatch();
 
    useEffect(() => {
@@ -72,25 +74,41 @@ const MessagesContainer = () => {
             dispatch(
                fetchNewMessages({
                   conversationId,
-                  lastMessageId: messages[messages.length - 1].conversationid,
+                  lastMessageId: messages[messages.length - 1].id,
                })
             );
          }, 300);
       }
+      else if (conversationId) {
+         setTimeout(() => {
+            dispatch(
+               fetchConversationMessages({conversationId})
+            );
+         }, 300);
+      }
    };
+   /**
+    * Informs if creator should be disabled.
+    *
+    * i.e. if there isn't the information availalbe to make a valid message post.
+    */
+   const isDisabled =
+      Boolean(conversationId) &&
+      Boolean(currentUser.id) &&
+      Boolean(currentUser.isAuthenticated)
+         ? false
+         : true;
+
    return (
       <div>
          {messages.length && participants.length ? (
             <MessageList messages={messages} participants={participants} />
-         ) : (
-            <Spinner />
-         )}
-         <div></div>
+         ) : loadingStatus !== 'idle' ? (
+            <p>No messages yet.</p>
+         ) : null}
+         {loadingStatus !== 'fulfilled' ? <Spinner /> : null}
 
-         <MessageCreator
-            handleSubmit={onMessagePost}
-            disabled={currentUser && conversationId ? true : false}
-         />
+         <MessageCreator handleSubmit={onMessagePost} disabled={isDisabled} />
       </div>
    );
 };
