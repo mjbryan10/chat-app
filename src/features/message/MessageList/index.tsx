@@ -2,7 +2,9 @@ import React, { FC } from 'react';
 import { Participant } from '../messageSlice';
 import MessageItem from '../MessageItem';
 import * as S from './styles';
-import { Message } from 'shared/Api/types';
+import { Message, TIME_FORMAT } from 'shared/Api/types';
+import moment from 'moment';
+import MessageDate from '../MessageDate';
 
 interface Props {
    messages: Message[];
@@ -10,22 +12,56 @@ interface Props {
 }
 
 const MessageList: FC<Props> = ({ messages, participants }) => {
+   const dates: string[] = [];
    return (
       <S.Wrapper>
          {messages.map((message, index) => {
+            const time = moment(message.timestamp, TIME_FORMAT);
+            const date = time.format('DD-MM-YYYY');
+            const now = moment();
+            const today = moment().format('DD-MM-YYYY');
+
             const participant = participants.find((user) => user.id === message.senderId);
             if (participant) {
-               const isChain = message.senderId === messages[index + 1]?.senderId || false;
-               return (
-                  <MessageItem
-                     key={message.id}
-                     messageDetails={message}
-                     userDetails={participant}
-                     isChainMessage={isChain}
-                  />
-               );
+               const isChain =
+                  message.senderId === messages[index + 1]?.senderId || false;
+               if (dates.includes(date)) {
+                  return (
+                     <MessageItem
+                        key={message.id}
+                        messageDetails={message}
+                        userDetails={participant}
+                        isChainMessage={isChain}
+                     />
+                  );
+               } else {
+                  let value = today;
+                  dates.push(date);
+                     switch (now.diff(time, 'days')) {
+                        case 0:
+                           value = 'Today';
+                           break;
+                        case 1:
+                           value = 'Yesterday';
+                           break;
+                        default:
+                           value = today;
+                           break;
+                     }
+                  return (
+                     <>
+                        <MessageDate value={value} key={value} />
+                        <MessageItem
+                           key={message.id}
+                           messageDetails={message}
+                           userDetails={participant}
+                           isChainMessage={isChain}
+                        />
+                     </>
+                  );
+               }
             }
-            return <p>Trouble loading message, try again later.</p>; 
+            return <p>Trouble loading message, try again later.</p>;
          })}
       </S.Wrapper>
    );

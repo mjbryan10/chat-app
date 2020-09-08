@@ -46,3 +46,5 @@ export type NewMessagesResponse = Message[] | { message: string };
 export interface ApiPostResponse {
    id: number;
 }
+
+export const TIME_FORMAT = 'YYYY-MM-DD hh:mm:ss'
