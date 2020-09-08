@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import UserApi from '../../Api/UserApi';
-import { User } from '../../Api/@types';
+import UserApi from '../../shared/Api/UserApi';
+import { User } from '../../shared/Api/types';
 import { loginSlice } from '../login/loginSlice';
 import { RootState } from '../../app/store';
 

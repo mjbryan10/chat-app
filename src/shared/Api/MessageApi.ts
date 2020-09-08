@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import BaseApi from "./BaseApi";
-import { Message, ApiPostResponse, NewMessagesResponse } from "./@types";
+import { Message, ApiPostResponse, NewMessagesResponse } from "./types";
 
 export default class MessageApi extends BaseApi {
   async fetchLimitedMessages(

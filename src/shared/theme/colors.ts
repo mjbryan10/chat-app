@@ -1,4 +1,4 @@
-import { ThemeColors } from './@types';
+import { ThemeColors } from './types';
 
 // const colors: ThemeColors = {
 //    primary: '#F83600',
@@ -38,6 +38,7 @@ const defaultColors: ThemeColors = {
    light: '#f8f9fa',
    dark: '#343a40',
    text: '#000',
+   owner: '#000',
 };
 
 export default defaultColors;

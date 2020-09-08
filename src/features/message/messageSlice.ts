@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { Message, NewMessagesResponse } from '../../Api/@types';
-import MessageApi from '../../Api/MessageApi';
+import { Message, NewMessagesResponse } from '../../shared/Api/types';
+import MessageApi from '../../shared/Api/MessageApi';
+import moment from 'moment';
+import { SpectrumColor } from 'shared/theme/types';
 
 /**
  * The arguments passed to the payLoadCreator for fetchNewMessages
@@ -15,8 +17,14 @@ interface FetchNewMessagesArgs {
  */
 interface fetchLimitedMessagesArgs {
    conversationId: number;
-   limit: number;
-   offset: number;
+   limit?: number;
+   offset?: number;
+}
+export interface Participant {
+   id: number;
+   name: string;
+   color: SpectrumColor;
+   isOwner: boolean;
 }
 /**
  * A helper type-guard function that validates if the NewMessagesResponse interface
@@ -28,6 +36,7 @@ interface fetchLimitedMessagesArgs {
 function hasNewMessages(apiResponse: NewMessagesResponse): apiResponse is Message[] {
    return Array.isArray(apiResponse as Message[]);
 }
+
 /**
  * String values available to the loading status.
  */
@@ -57,9 +66,9 @@ const messageApi = new MessageApi();
 
 /**
  * Async Thunk action creator for fetching new messages from the API
- * 
+ *
  * On success will update the redux store with the new messages (if available)
- * 
+ *
  * @param payloadCreator `{conversationId, lastMessageId}`
  */
 export const fetchNewMessages = createAsyncThunk(
@@ -75,15 +84,15 @@ export const fetchNewMessages = createAsyncThunk(
 
 /**
  * Async Thunk action creator for fetching older messages.
- * 
+ *
  * Will fetch `limit` amount of messages from the API,
  * going from most recent - offset backwards.
- * 
+ *
  * @param payloadCreator `{conversationId, limit = 10, offset}`
  */
 export const fetchOlderMessages = createAsyncThunk(
    'message/fetchOlderMessages',
-   async ({ conversationId, limit = 10, offset }: fetchLimitedMessagesArgs) => {
+   async ({ conversationId, limit = 10, offset = 0 }: fetchLimitedMessagesArgs) => {
       return messageApi.fetchLimitedMessages(conversationId, limit, offset);
    }
 );
@@ -107,13 +116,14 @@ export const fetchConversationMessages = createAsyncThunk(
 export const messageSlice = createSlice({
    name: 'message',
    initialState,
-   reducers: {},
+   reducers: {
+   },
    extraReducers: (builder) => {
       builder
          /* fetchNewMessages */
          .addCase(fetchNewMessages.fulfilled, (state, action) => {
             const { data, status } = action.payload;
-            const now = Date.now()
+            const now = moment().valueOf();
 
             if (status === 200 && Array.isArray(data) && state.lastUpdated < now) {
                state.messages = [...state.messages, ...data];
@@ -127,8 +137,8 @@ export const messageSlice = createSlice({
          .addCase(fetchNewMessages.rejected, (state, action) => {
             state.status = 'rejected';
          })
-         
-         /* fetchOldMessages */
+
+         /* fetchOlderMessages */
          .addCase(fetchOlderMessages.fulfilled, (state, action) => {
             const { data, status } = action.payload;
             if (status === 200) {
@@ -170,7 +180,6 @@ export const selectMessages = (state: RootState) => state.message.messages;
  * Returns the current message loading status
  * @param state The current Root State
  */
-export const selectMessageLoadingStatus = (state: RootState) =>
-   state.message.status;
+export const selectMessageLoadingStatus = (state: RootState) => state.message.status;
 
 export default messageSlice.reducer;

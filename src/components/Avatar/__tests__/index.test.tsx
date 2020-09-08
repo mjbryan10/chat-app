@@ -25,7 +25,7 @@ describe('Avatar component', () => {
   });
 
   test('should render the first letter captalised only', () => {
-    const utils = render(<Avatar text="Demo name or message"/>)
+    const utils = render(<Avatar title="Demo name or message"/>)
 
     const innerContainer = utils.getByTestId('avatar-inner-container');
 

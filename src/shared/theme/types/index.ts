@@ -1,16 +1,38 @@
 /**
- * Colors found on the theme
+ * Class for making an array of colors
+ * 
+ * 
+ * Technique to avoid hard typing names into array:
+ * @see https://stackoverflow.com/a/59806829/12873927
  */
-export interface ThemeColors {
-   primary: string;
-   secondary: string;
-   success: string;
-   warning: string;
-   danger: string;
-   info: string;
-   dark: string;
-   light: string;
-   text: string;
+class ColorSpectrumList {
+   /**
+    * 
+    */
+   constructor(
+      readonly blue?: string,
+      readonly red?: string,
+      readonly green?: string,
+      readonly purple?: string,
+      readonly orange?: string,
+      readonly pink?: string,
+      readonly indigo?: string,
+      readonly teal?: string,
+      readonly yellow?: string,
+      readonly cyan?: string,
+   ){}
+}
+export type SpectrumColor = keyof ColorSpectrumList;
+/**
+ * An array of color names for use.
+ */
+export const colorSpectrumArray = Object.keys(new ColorSpectrumList()) as SpectrumColor[]; 
+/**
+ * Color Spectrum
+ * 
+ * Implements class and makes fields no longer optional.
+ */
+export interface ColorSpectrum extends ColorSpectrumList {
    blue: string;
    indigo: string;
    purple: string;
@@ -21,6 +43,24 @@ export interface ThemeColors {
    green: string;
    teal: string;
    cyan: string;
+   /**
+    * Color for the owner of message/conversation
+    */
+   owner: string;
+}
+/**
+ * Colors found on the theme
+ */
+export interface ThemeColors extends ColorSpectrum {
+   primary: string;
+   secondary: string;
+   success: string;
+   warning: string;
+   danger: string;
+   info: string;
+   dark: string;
+   light: string;
+   text: string;
    white: string;
    gray: string;
    grayDark: string;
@@ -34,9 +74,11 @@ export type ThemeColor = keyof ThemeColors;
  */
 export interface ThemeBackgrounds {
    page: string;
-   //messageBackground: string;
+   message: string;
    buttonPrimary: string;
    inputField: string;
+   conversation: string;
+   conversationSelected: string;
 }
 
 /**
