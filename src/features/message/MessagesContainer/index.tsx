@@ -28,13 +28,52 @@ const MessagesContainer = () => {
    const loadingStatus = useSelector(selectMessageLoadingStatus);
    const dispatch = useDispatch();
 
+   /**
+    * Initial message fetching and population
+    */
    useEffect(() => {
       //Fetches the messages
       if (conversationId) dispatch(fetchConversationMessages({ conversationId }));
    }, [conversationId, dispatch]);
 
+   
+   /**
+    * Systematic message updating
+    * 
+    * Polls the database for new messages at every interval.
+    */
+   useEffect(() => {
+      //TODO: Uncomment
+   //    const retreiveMessages = () => {
+   //    if (conversationId && messages.length) {
+   //       dispatch(
+   //          fetchNewMessages({
+   //             conversationId,
+   //             lastMessageId: messages[messages.length - 1].id,
+   //          })
+   //       );
+   //    } else if (conversationId) {
+   //       dispatch(fetchConversationMessages({ conversationId }));
+   //    }
+   // };
+   //    const refreshMessages = setInterval(() => {
+   //       console.log('refreshed');
+   //          retreiveMessages();
+   //    }, 5000);
+   //    return () => {
+   //       clearInterval(refreshMessages);
+   //    };
+   }, [conversationId, dispatch, messages]);
+
+   /**
+    * Local state for holding conversation Participants details.
+    */
    const [participants, setParticipants] = useState<Participant[]>([]);
 
+   /**
+    * Updates the participants state should the current conversation
+    * or current user change.
+    */
    useEffect(() => {
       if (currentConversation) {
          const userApi = new UserApi();
@@ -64,6 +103,12 @@ const MessagesContainer = () => {
       }
    }, [currentConversation, currentUser.id]);
 
+   /**
+    * An on submit handler for handling a form submission for a new message.
+    *
+    * Posts the message to the API and triggers a request to update the messages state.
+    * @param value A string value from the message creator's textarea.
+    */
    const onMessagePost = (value: string) => {
       const messageApi = new MessageApi();
       if (conversationId && currentUser.id && currentUser.isAuthenticated) {
@@ -78,12 +123,9 @@ const MessagesContainer = () => {
                })
             );
          }, 300);
-      }
-      else if (conversationId) {
+      } else if (conversationId) {
          setTimeout(() => {
-            dispatch(
-               fetchConversationMessages({conversationId})
-            );
+            dispatch(fetchConversationMessages({ conversationId }));
          }, 300);
       }
    };
@@ -106,7 +148,7 @@ const MessagesContainer = () => {
          ) : loadingStatus !== 'idle' ? (
             <p>No messages yet.</p>
          ) : null}
-         {loadingStatus !== 'fulfilled' ? <Spinner /> : null}
+         {loadingStatus === 'pending' ? <Spinner /> : null}
 
          <MessageCreator handleSubmit={onMessagePost} disabled={isDisabled} />
       </div>
