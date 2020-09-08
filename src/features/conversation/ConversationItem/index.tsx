@@ -13,7 +13,7 @@ import { SpectrumColor } from 'shared/theme/types';
 
 interface Props {
    conversation: Conversation;
-   color: SpectrumColor
+   color: SpectrumColor;
 }
 /**
  * A React functional component for rendering a conversation option.
