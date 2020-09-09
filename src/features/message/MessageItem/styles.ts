@@ -32,8 +32,8 @@ export const Container = styled.div<ContainerProps>`
       height: 10px;
       clip-path: polygon(100% 0, 0 100%, 0 0);
       background: ${colorOrOwner};
-      margin: -1.5px -1.5px -10px -1.5px;
-      ${({ isOwner }) => (isOwner ? 'transform: rotateY(180deg);' : null)}
+      margin: 0 -1.5px -10px -1.5px;
+      ${({ isOwner }) => (isOwner ? `transform: rotateY(180deg); margin-right: -1.5px;` : null)}
       ${({ isChained }) => (isChained ? 'display: none;' : null)}
    }
 `;
