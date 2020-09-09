@@ -10,10 +10,10 @@ export const Container = styled.div`
 `;
 
 export const MessagesDisplay = styled.div<ThemeProps<Theme>>`
-   width: 100%;
-   /* max-width: 2000px; */
    height: 100%;
    min-height: 200px;
+   max-height: 50vh;
+   overflow-y: auto;
    padding: 1em;
    background: ${({ theme }) => theme.background.messagesDisplay};
    border: ${({ theme }) => theme.border};
