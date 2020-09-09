@@ -4,6 +4,9 @@ import { Props } from '.';
 interface ButtonProps extends ThemeProps<Theme>, Props {}
 
 export const Button = styled.button<ButtonProps>`
+   display: flex;
+   justify-content: center;
+   align-items: center;
    box-sizing: border-box;
    height: ${({ height }) => (height || 50)}px;
    width: ${({ width }) => (width || 50)}px;
