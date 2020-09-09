@@ -113,11 +113,11 @@ export const conversationSlice = createSlice({
          state.currentConversation = conversation || null;
          state.currentConversationId = conversation?.conversation.id ?? null;
       },
-      clearCurrentConversation(state, action) {
+      clearCurrentConversation(state) {
          state.currentConversation = null;
          state.currentConversationId = null;
       },
-      clearConversations(state, action) {
+      clearConversations(state) {
          state.conversations = [];
       },
    },

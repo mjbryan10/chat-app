@@ -21,4 +21,5 @@ export const ItemButton = styled.button<ButtonProps>`
    }}
    border: ${({ color, theme }) => theme.color[color]} 1px solid;
    margin: 3px 0;
+   width: 100%;
 `;

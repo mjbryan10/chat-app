@@ -10,6 +10,7 @@ import {
 } from '../conversationSlice';
 import { isSelectedConversation, computeConversationName } from './helpers';
 import { SpectrumColor } from 'shared/theme/types';
+import { setNavigationState } from 'features/navigation/navigationSlice';
 
 interface Props {
    conversation: Conversation;
@@ -61,6 +62,7 @@ const ConversationItem: FC<Props> = ({ conversation, color }) => {
    const onClick = (event: SyntheticEvent<HTMLButtonElement>) => {
       event.preventDefault();
       dispatch(setCurrentConversation(id));
+      dispatch(setNavigationState('message'));
    };
    return (
       <S.ItemButton
