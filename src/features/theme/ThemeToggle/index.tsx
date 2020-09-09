@@ -5,6 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import { isThemeName } from '../../../shared/theme/types';
 
+import {IoMdSunny, IoMdMoon} from 'react-icons/io'
+import ButtonNavbarIcon from 'components/ButtonNavbarIcon';
+
 const ThemeToggle = () => {
    const currentTheme = useSelector(selectTheme);
    const dispatch = useDispatch();
@@ -27,10 +30,15 @@ const ThemeToggle = () => {
       Cookies.set('theme', newTheme, { expires: 7 });
    };
 
+   const handleClick = () => {
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      dispatch(toggleTheme());
+      Cookies.set('theme', newTheme, { expires: 7 });
+   };
+
    return (
       <S.Container>
-         {/* <image of the sun> */}
-         <S.Switch>
+         {/* <S.Switch>
             <S.Input
                type="checkbox"
                onChange={onChange}
@@ -39,8 +47,11 @@ const ThemeToggle = () => {
             />
             <S.Slider>
             </S.Slider>
-         </S.Switch>
-         {/* <image of the moon> */}
+         </S.Switch> */}
+
+         <ButtonNavbarIcon handleClick={handleClick}>
+            {currentTheme === 'dark' ? <IoMdSunny /> : <IoMdMoon />}
+         </ButtonNavbarIcon>
       </S.Container>
    );
 };

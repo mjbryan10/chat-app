@@ -58,3 +58,12 @@ export const Container = styled.div`
    display: flex;
    flex-flow: row nowrap;
 `;
+
+
+//ALTERNATIVE:
+
+export const ThemeToggleButton = styled.button<ThemeProps<Theme>>`
+   color: ${({theme}) => theme.color.primary} 
+`;
+
+
