@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import InputTextFieldWithLabel from '../../../components/InputTextFieldWithLabel';
 import InputSubmitButton from '../../../components/InputSubmitButton';
 import * as S from './styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectLogin, loginUser } from '../loginSlice';
 
-const Login: React.FC = ({ children }) => {
+const Login: FC = () => {
    const { isAuthenticated } = useSelector(selectLogin);
    const dispatch = useDispatch();
 
