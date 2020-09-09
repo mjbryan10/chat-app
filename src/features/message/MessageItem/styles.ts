@@ -1,23 +1,30 @@
 import styled, { ThemeColor, ThemeProps, Theme } from 'styled-components';
 
-interface Props extends ThemeProps<Theme> {
+interface ContainerProps extends ThemeProps<Theme> {
    color: ThemeColor;
    isChained: boolean;
    isOwner: boolean;
 }
-
-const colorOrOwner = ({theme, isOwner, color}: Props) => {
-  return (isOwner ? theme.color.owner : theme.color[color]) ?? 'inherit';
+interface HeaderProps extends ThemeProps<Theme> {
+   color: ThemeColor;
 }
-   
 
-export const Container = styled.div<Props>`
-   background: ${({ theme }: Props) => theme.background.message ?? 'inherit'};
+const colorOrOwner = ({ theme, isOwner, color }: ContainerProps) => {
+   return (isOwner ? theme.color.owner : theme.color[color]) ?? 'inherit';
+};
+
+const colorProp = ({ theme, color }: HeaderProps) => {
+   return theme.color[color] ?? 'inherit';
+};
+
+export const Container = styled.div<ContainerProps>`
+   background: ${({ theme }: ContainerProps) => theme.background.message ?? 'inherit'};
    border: ${colorOrOwner} 1.5px solid;
    min-width: 30%;
    max-width: 800px;
    margin: 5px;
-   ${({isOwner}) => isOwner ? `margin: 5px 5px 5px auto;` : `margin: 5px auto 5px 5px;`}
+   ${({ isOwner }) =>
+      isOwner ? `margin: 5px 5px 5px auto;` : `margin: 5px auto 5px 5px;`}
    &::after {
       display: block;
       content: ' ';
@@ -25,22 +32,22 @@ export const Container = styled.div<Props>`
       height: 10px;
       clip-path: polygon(100% 0, 0 100%, 0 0);
       background: ${colorOrOwner};
-      margin: -1.5px -1.5px -10px -1.5px;
-      ${({ isOwner }) => (isOwner ? 'transform: rotateY(180deg);' : null)}
-      ${({isChained}) => isChained ? 'display: none;' : null}
+      margin: 0 -1.5px -10px -1.5px;
+      ${({ isOwner }) => (isOwner ? `transform: rotateY(180deg); margin-right: -1.5px;` : null)}
+      ${({ isChained }) => (isChained ? 'display: none;' : null)}
    }
-   
 `;
 
-export const Header = styled.div`
+export const Header = styled.div<HeaderProps>`
+   color: ${colorProp};
    display: flex;
    flex-flow: row nowrap;
    justify-content: space-between;
    align-items: center;
+   padding: 0 0.5rem;
 `;
 
-export const Detail = styled.span<ThemeProps<Theme>>`
-   color: ${({ theme }) => theme.color.text ?? 'inherit'};
+export const Detail = styled.span`
    &:first-of-type {
       margin-right: auto;
    }
@@ -49,8 +56,9 @@ export const Detail = styled.span<ThemeProps<Theme>>`
    }
 `;
 
-export const Body = styled.div`
-  padding: 0.5em;
+export const Body = styled.div<ThemeProps<Theme>>`
+   padding: 0.5em;
+   color: ${({theme}) => theme.color.text ?? 'auto'}
 `;
 
 export const BodyText = styled.p`

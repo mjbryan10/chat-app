@@ -3,8 +3,7 @@ import { RootState, LoadingStatus } from '../../app/store';
 import { Message, NewMessagesResponse } from '../../shared/Api/types';
 import MessageApi from '../../shared/Api/MessageApi';
 import moment from 'moment';
-import { ThemeColor } from 'shared/theme/types';
-
+import { ThemeColor } from '../../shared/theme/types';
 
 //TYPES:
 
@@ -44,7 +43,7 @@ interface messageState {
 const initialState: messageState = {
    messages: [],
    status: 'idle',
-   lastUpdated: Date.now(),
+   lastUpdated: 0,
 };
 
 //HELPERS:
@@ -62,21 +61,22 @@ function hasNewMessages(apiResponse: NewMessagesResponse): apiResponse is Messag
 /**
  * A helper function that converts the API timestamp format into a number value
  * for comparison use.
- * 
+ *
  * @param timestamp A timestamp string value, in YYYY-MM-DD HH:mm:ss format
  */
 const timestampToValue = (timestamp: string): number => {
    return moment(timestamp, 'YYYY-MM-DD HH:mm:ss').valueOf();
-}
+};
 /**
  * Helper function that sorts an array of messages chronologically by its timestamp.
- * 
+ *
  * @param messages The array of messages which needs to be chronologically sorted
  */
 const sortMessages = (messages: Message[]): Message[] => {
-   return messages.sort((a,b) => timestampToValue(a.timestamp) - timestampToValue(b.timestamp) ) 
-}
-
+   return messages.sort(
+      (a, b) => timestampToValue(a.timestamp) - timestampToValue(b.timestamp)
+   );
+};
 
 //ASYNC ACTIONS:
 
@@ -130,7 +130,6 @@ export const fetchConversationMessages = createAsyncThunk(
    }
 );
 
-
 //SLICE:
 
 /**
@@ -141,6 +140,11 @@ export const messageSlice = createSlice({
    name: 'message',
    initialState,
    reducers: {
+      resetMessages(state) {
+         state.messages = [];
+         state.status = 'idle';
+         state.lastUpdated = 0;
+      },
    },
    extraReducers: (builder) => {
       builder
@@ -200,7 +204,7 @@ export const messageSlice = createSlice({
 });
 
 //EXPORTS:
-
+export const { resetMessages } = messageSlice.actions;
 /**
  * Returns the current messages in the store
  * @param state The current Root State
@@ -210,6 +214,7 @@ export const selectMessages = (state: RootState) => state.message.messages;
  * Returns the current message loading status
  * @param state The current Root State
  */
-export const selectMessageLoadingStatus = (state: RootState):LoadingStatus  => state.message.status;
+export const selectMessageLoadingStatus = (state: RootState): LoadingStatus =>
+   state.message.status;
 
 export default messageSlice.reducer;

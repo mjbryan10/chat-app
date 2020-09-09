@@ -14,9 +14,14 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
+   display: flex;
+   flex-flow: column nowrap;
    padding: 1em;
    position: relative;
-   flex-flow: column nowrap;
-   display: flex;
-   align-items: flex-end;
+   & input {
+      margin-bottom: 3px;
+   }
+   & input[type='submit'] {
+      margin-top: 5px;
+   }
 `;

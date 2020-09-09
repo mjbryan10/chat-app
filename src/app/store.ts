@@ -4,6 +4,7 @@ import usersReducer from '../features/users/usersSlice';
 import themeReducer from '../features/theme/themeSlice';
 import conversationReducer from '../features/conversation/conversationSlice';
 import messageReducer from '../features/message/messageSlice';
+import navigationReducer from '../features/navigation/navigationSlice'
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     users: usersReducer,
     theme: themeReducer,
     conversation: conversationReducer,
-    message: messageReducer
+    message: messageReducer,
+    navigation: navigationReducer,
   },
 });
 

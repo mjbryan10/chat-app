@@ -1,6 +1,5 @@
 import styled, { ThemeProps, Theme } from 'styled-components';
 import { SpectrumColor } from 'shared/theme/types';
-// import { ThemeColor } from 'shared/theme/types';
 
 interface ButtonProps extends ThemeProps<Theme> {
    selected: boolean;
@@ -22,4 +21,6 @@ export const ItemButton = styled.button<ButtonProps>`
    }}
    border: ${({ color, theme }) => theme.color[color]} 1px solid;
    margin: 3px 0;
+   width: 100%;
+   padding: 0;
 `;

@@ -62,21 +62,47 @@ describe('MessageCreator component', () => {
       expect(__handleSubmit).toBeCalledTimes(1);
       expect(textbox).toHaveDisplayValue('');
    });
-   
-   test('should submit to handler on form submit', () => {
+ //TODO: Revisit
+   test('should submit to handler on `Enter` keypress', () => {
       cleanup();
       const __handleSubmit = jest.fn();
       utils = render(<MessageCreator handleSubmit={__handleSubmit} />);
-      const { getByTestId } = utils;
-      const form = getByTestId('message-creator-form');
+      const { getByTestId, getByText } = utils;
       const textbox = getByTestId('message-creator-textbox');
 
       act(() => {
          fireEvent.change(textbox, { target: { value: testText } });
-         fireEvent.submit(form);
+         fireEvent.keyPress(getByText(testText), {
+            key: 'Enter',
+            charCode: 13,
+            keyCode: 13,
+            code: 'Enter',
+            shiftKey: null,
+         });
       });
 
       expect(__handleSubmit).toBeCalledTimes(1);
+      expect(textbox).toHaveDisplayValue('');
+   });
+   test('should not submit to handler on `Shift+Enter` keypress', () => {
+      cleanup();
+      const __handleSubmit = jest.fn();
+      utils = render(<MessageCreator handleSubmit={__handleSubmit} />);
+      const { getByTestId, getByText } = utils;
+      const textbox = getByTestId('message-creator-textbox');
+
+      act(() => {
+         fireEvent.change(textbox, { target: { value: testText } });
+         fireEvent.keyPress(getByText(testText), {
+            key: 'Enter',
+            charCode: 13,
+            keyCode: 13,
+            code: 'Enter',
+            shiftKey: true,
+         });
+      });
+
+      expect(__handleSubmit).toBeCalledTimes(0);
       expect(textbox).toHaveDisplayValue('');
    });
 });

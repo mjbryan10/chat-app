@@ -1,5 +1,6 @@
-import React, { FC, useState, SyntheticEvent } from 'react';
+import React, { FC, useState, SyntheticEvent, KeyboardEvent } from 'react';
 import InputSubmitButton from 'components/InputSubmitButton';
+import * as S from './styles';
 
 interface Props {
    handleSubmit?: (value: string) => void;
@@ -8,9 +9,9 @@ interface Props {
 
 const MessageCreator: FC<Props> = ({ handleSubmit, disabled = false }) => {
    const [messageValue, setMessageValue] = useState('');
-   const onSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
-      if (!disabled) {
-         event.preventDefault();
+   const onSubmit = (event?: SyntheticEvent<HTMLFormElement>) => {
+      if (event) event.preventDefault();
+      if (!disabled && messageValue.length) {
          if (handleSubmit) handleSubmit(messageValue);
          setMessageValue('');
       }
@@ -20,12 +21,21 @@ const MessageCreator: FC<Props> = ({ handleSubmit, disabled = false }) => {
       const { value } = event.currentTarget;
       setMessageValue(value);
    };
+   const onEnterPress = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+      if (event.charCode === 13 && event.shiftKey === false) {
+         event.preventDefault();
+         onSubmit();
+      }
+   };
    return (
-      <form onSubmit={onSubmit} data-testid="message-creator-form">
-         <textarea
+      <S.Form onSubmit={onSubmit} data-testid="message-creator-form">
+         <S.TextArea
             value={messageValue}
-            placeholder="Write your meessage here"
+            placeholder={
+               disabled ? 'Choose a conversation first' : 'Write your message here'
+            }
             onChange={onChange}
+            onKeyPress={onEnterPress}
             data-testid="message-creator-textbox"
             disabled={disabled}
          />
@@ -34,7 +44,7 @@ const MessageCreator: FC<Props> = ({ handleSubmit, disabled = false }) => {
             data-testid="message-creator-button"
             disabled={disabled}
          />
-      </form>
+      </S.Form>
    );
 };
 

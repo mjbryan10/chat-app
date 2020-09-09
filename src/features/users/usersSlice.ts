@@ -1,26 +1,33 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import UserApi from '../../shared/Api/UserApi';
 import { User } from '../../shared/Api/types';
-import { loginSlice } from '../login/loginSlice';
-import { RootState } from '../../app/store';
+import { RootState, LoadingStatus } from '../../app/store';
+
+//TYPES:
 
 interface usersState {
    users: User[];
    lastUpdated: number;
-   error: boolean;
+   status: LoadingStatus;
+   error: string;
 }
 
 const initialState: usersState = {
    users: [],
    lastUpdated: Date.now(),
-   error: false
+   status: 'idle',
+   error: ''
 };
+
+//ASYNC ACTIONS:
 
 const userApi = new UserApi();
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
    return await userApi.fetchAll();
 });
+
+//SLICE:
 
 export const usersSlice = createSlice({
    name: 'users',
@@ -33,18 +40,26 @@ export const usersSlice = createSlice({
             if(now > state.lastUpdated) {
                state.users = action.payload;
                state.lastUpdated = now;
-               state.error = false;
             }
+            state.error = '';
+            state.status = 'fulfilled';
          })
          .addCase(fetchUsers.pending, (state, action) => {
-            state.error = false;
+            state.status = 'pending';
          })
          .addCase(fetchUsers.rejected, (state, action) => {
-            state.error = true;
+            state.error = 'Unable to fetch users at this time';
+            state.status = 'fulfilled';
          });
    },
 });
 
-export const selectUsers = (state: RootState) => state.users;
+//SELECTORS:
 
-export default loginSlice.reducer;
+export const selectUsers = (state: RootState) => state.users.users;
+export const selectUsersStatus = (state: RootState) => state.users.status;
+export const selectUsersError = (state: RootState) => state.users.error;
+
+//REDUCER:
+
+export default usersSlice.reducer;
