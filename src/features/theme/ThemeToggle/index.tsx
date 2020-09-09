@@ -24,12 +24,6 @@ const ThemeToggle = () => {
       }
    }, [currentTheme, dispatch]);
 
-   const onChange = () => {
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      dispatch(toggleTheme());
-      Cookies.set('theme', newTheme, { expires: 7 });
-   };
-
    const handleClick = () => {
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       dispatch(toggleTheme());
@@ -38,17 +32,6 @@ const ThemeToggle = () => {
 
    return (
       <S.Container>
-         {/* <S.Switch>
-            <S.Input
-               type="checkbox"
-               onChange={onChange}
-               checked={currentTheme === 'dark'}
-               data-testid="theme-toggle-checkbox"
-            />
-            <S.Slider>
-            </S.Slider>
-         </S.Switch> */}
-
          <ButtonNavbarIcon handleClick={handleClick}>
             {currentTheme === 'dark' ? <IoMdSunny /> : <IoMdMoon />}
          </ButtonNavbarIcon>
