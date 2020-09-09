@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, SyntheticEvent, KeyboardEvent } from 'react';
+import React, { FC, useState, SyntheticEvent, KeyboardEvent } from 'react';
 import InputSubmitButton from 'components/InputSubmitButton';
 import * as S from './styles';
 
