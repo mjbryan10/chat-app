@@ -1,10 +1,11 @@
 import styled, { ThemeProps, Theme } from 'styled-components';
 
 export const TextArea = styled.textarea<ThemeProps<Theme>>`
-   min-height: 75px;
+   box-sizing: border-box;
+   min-height: 3rem;
    font-family: inherit;
    font-size: 1rem;
-   padding: 0.3rem;
+   padding: 1rem;
    /* min-width: 80%; */
    flex-grow: 1;
    margin: 15px 15px 0 0;
@@ -19,7 +20,7 @@ export const TextArea = styled.textarea<ThemeProps<Theme>>`
 `;
 
 export const Form = styled.form`
-  display: flex;
-  width: 100%;
-  align-items: center;
+   display: flex;
+   width: 100%;
+   align-items: center;
 `;
