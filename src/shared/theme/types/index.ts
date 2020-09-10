@@ -83,6 +83,15 @@ export interface ThemeBackgrounds {
 }
 
 /**
+ * Snippets for deployment across themed components.
+ */
+export interface ThemeSnippets {
+   transition: {
+      short: string;
+      long: string;
+   }
+}
+/**
  * Export of Theme to 'styled-components'
  */
 declare module 'styled-components' {
@@ -93,6 +102,7 @@ declare module 'styled-components' {
       color: ThemeColors;
       background: ThemeBackgrounds;
       border: string;
+      snippets: ThemeSnippets;
    }
    /**
     * Possible colors available for use in theme
