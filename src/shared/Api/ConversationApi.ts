@@ -19,7 +19,7 @@ export default class ConversationApi extends BaseApi {
    ): Promise<AxiosResponse<ApiPostResponse>> {
       const response = await axios
          .post(`${this.baseUrl}conversation/personal`, {
-            users,
+            users: users.toString(),
          })
          .catch((error) => {
             throw error;
@@ -31,16 +31,18 @@ export default class ConversationApi extends BaseApi {
    async createNewGroupConversation(
       users: number[],
       name: string
-   ): Promise<AxiosResponse<ApiPostResponse>> {
+      ) {
+         console.log('users: ', users, 'name: ', name);
+
       const response = await axios
          .post(`${this.baseUrl}conversation/group`, {
-            users,
+            users: users.toString(),
             name,
          })
          .catch((error) => {
             throw error;
          });
-
+      
       return response;
    }
 }
