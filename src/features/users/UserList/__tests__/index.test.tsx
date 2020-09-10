@@ -45,6 +45,6 @@ describe('UsersList Feature Component', () => {
     fireEvent.click(firstUserItem);
 
       expect(__handleItemClick).toBeCalledTimes(1);
-      expect(__handleItemClick).toBeCalledWith(1);
+      expect(__handleItemClick).toBeCalledWith(__users[0]);
    });
 });

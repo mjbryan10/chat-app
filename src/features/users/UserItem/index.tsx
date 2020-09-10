@@ -4,17 +4,17 @@ import { User } from 'shared/Api/types';
 
 interface Props {
   user: User;
-  handleClick?: (id: number) => void;
+  handleClick?: (user: User) => void;
 }
 
 const UserItem: FC<Props> = ({user, handleClick}) => {
 
-  const onClick = (id: number) => (event: SyntheticEvent<HTMLElement>) => {
+  const onClick = (user: User) => (event: SyntheticEvent<HTMLElement>) => {
     event.preventDefault();
-    if (handleClick) handleClick(id);
+    if (handleClick) handleClick(user);
   }
   return (
-    <S.Container onClick={onClick(user.id)} data-testid="user-item">
+    <S.Container onClick={onClick(user)} data-testid="user-item">
       {user.name}
     </S.Container>
   )

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { User } from 'shared/Api/types';
 import UserList from '../UserList';
 import InputTextFieldWithLabel from 'components/InputTextFieldWithLabel';
@@ -6,11 +6,12 @@ import * as S from './styles';
 
 interface Props {
    users: User[];
-   handleItemClick?: (id: number) => void;
+   handleItemClick?: (user: User) => void;
 }
 
 const UserListWithSearch: FC<Props> = ({ users, handleItemClick }) => {
    const [searchString, setSearchString] = useState('');
+   const [userState, setUserState] = useState<User[]>([]);
    /**
     * Handler for the search input. Updates the search string state to the
     * user inputted value.
@@ -20,18 +21,23 @@ const UserListWithSearch: FC<Props> = ({ users, handleItemClick }) => {
    const handleSearchChange = (value: string) => {
       setSearchString(value);
    };
-   /**
-    * @returns An array of users where the username matches the search string
-    *
-    * @returns Full users array if there is no search string.
-    */
-   const filteredUsers = () => {
-      const usersArray = users;
-      if (!searchString.length) return usersArray;
-      return usersArray.filter((user) =>
-         user.name.toLowerCase().includes(searchString.toLowerCase())
-      );
-   };
+   useEffect(() => {
+      /**
+       * @returns An array of users where the username matches the search string
+       *
+       * @returns Full users array if there is no search string.
+       */
+      const filterUsers = (users: User[]) => {
+         const usersArray = users;
+         if (!searchString.length) return usersArray;
+         return usersArray.filter((user) =>
+            user.name.toLowerCase().includes(searchString.toLowerCase())
+         );
+      };
+      const newUserState = filterUsers(users);
+      setUserState(newUserState);
+   }, [searchString, users]);
+   
    return (
       <S.Container>
          <InputTextFieldWithLabel
@@ -40,7 +46,7 @@ const UserListWithSearch: FC<Props> = ({ users, handleItemClick }) => {
             handleChange={handleSearchChange}
             placeholder="Search for a user"
          />
-         <UserList users={filteredUsers()} handleItemClick={handleItemClick} />
+         <UserList users={userState} handleItemClick={handleItemClick} />
       </S.Container>
    );
 };
