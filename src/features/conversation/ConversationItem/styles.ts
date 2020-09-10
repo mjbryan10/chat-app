@@ -23,4 +23,7 @@ export const ItemButton = styled.button<ButtonProps>`
    margin: 3px 0;
    width: 100%;
    padding: 0;
+   &:hover {
+      cursor: pointer;
+   }
 `;
