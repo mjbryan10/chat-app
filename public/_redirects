@@ -1,0 +1,1 @@
+/api/* http://assignment.bunq.com/:splat 200!
