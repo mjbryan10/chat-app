@@ -18,6 +18,10 @@ import {
 } from 'features/users/usersSlice';
 import ConversationApi from 'shared/Api/ConversationApi';
 import InputTextFieldWithLabel from 'components/InputTextFieldWithLabel';
+import {
+   setNavigationState,
+   selectNavigationState,
+} from 'features/navigation/navigationSlice';
 
 const ConversationContainer = () => {
    //REDUX:
@@ -25,6 +29,7 @@ const ConversationContainer = () => {
    const { id: currentUserId } = useSelector(selectLogin);
    const status = useSelector(selectConversationStatus);
    const selectedUsers = useSelector(selectSelectedUsers); //TODO:
+   const navigationState = useSelector(selectNavigationState);
    const dispatch = useDispatch();
 
    //STATE:
@@ -40,6 +45,10 @@ const ConversationContainer = () => {
     */
 
    //CYCLE EFFECTS:
+
+   /**
+    * Fetches new conversations.
+    */
    useEffect(() => {
       if (currentUserId && !isCreateMode) {
          dispatch(fetchConversations(currentUserId));
@@ -48,66 +57,104 @@ const ConversationContainer = () => {
          dispatch(clearConversations);
       };
    }, [currentUserId, dispatch, isCreateMode]);
+   
+   /**
+    * Subscribes to the nagivationState and reacts when is set to index.
+    * 
+    * This allows user to use navigation tools to escape creation process.
+    */
+   useEffect(() => {
+      if (navigationState === 'index' && isCreateMode) {
+         setError('');
+         setIsCreateMode(false);
+      }
+   }, [isCreateMode, navigationState]);
 
    //METHODS:
+
+   /**
+    * toggles the create mode state. If the new mode is to be the create mode
+    * it informs redux of the new navigation state.
+    */
+   const toggleCreateMode = () => {
+      const newMode = !isCreateMode;
+      setError('');
+      setIsCreateMode(newMode);
+      if (newMode) {
+         dispatch(setNavigationState('conversation'));
+      }
+   };
+   /**
+    * Validates the creation process, updating the error state where
+    * appropiate
+    */
+   const validateCreation = (): boolean => {
+      if (!currentUserId) {
+         dispatch(logoutUser());
+         return false;
+      }
+      if (!selectedUsers.length) {
+         setError('Select who you wish to speak with first');
+         return false;
+      }
+      if (selectedUsers.length >= 2 && !conversationName.length) {
+         setError('Group conversations need a name');
+         return false;
+      }
+      return true;
+   };
+   /**
+    *
+    */
+   const createConversation = () => {
+      if (!currentUserId || !validateCreation()) return;
+      //Shorcuts and does not process if cannot validate.
+      const conversationApi = new ConversationApi();
+      const userIds: number[] = selectedUsers.map((user) => user.id);
+      userIds.push(currentUserId);
+
+      if (selectedUsers.length === 1) {
+         conversationApi
+            .createNewPersonalConversation(userIds)
+            .then((res) => {
+               resolveCreation();
+            })
+            .catch((error) => {
+               console.error(error);
+               setError('Oops, something went wrong. Please try again later.');
+            });
+      } else if (selectedUsers.length >= 2) {
+         conversationApi
+            .createNewGroupConversation(userIds, conversationName)
+            .then((res) => {
+               resolveCreation();
+            })
+            .catch((error) => {
+               console.error(error);
+               setError('Oops, something went wrong. Please try again later.');
+            });
+      }
+   };
+   const resolveCreation = () => {
+      dispatch(clearSelectedUsers());
+      dispatch(clearSelectableUsers());
+      setConversationName('');
+      toggleCreateMode();
+      if (currentUserId) {
+         dispatch(fetchConversations(currentUserId));
+      }
+   };
    /**
     * Handles the button clicking depending on if it is in create mode
     * @param event Button click event
     */
    const onClick = (event: SyntheticEvent<HTMLButtonElement>) => {
       event.preventDefault();
-      const newMode = !isCreateMode;
       if (!isCreateMode) {
-         setError('');
-         setIsCreateMode(newMode);
+         toggleCreateMode();
          return;
       }
-      //Validation
-      if (!currentUserId) {
-         dispatch(logoutUser());
-         return;
-      }
-      if (!selectedUsers.length) {
-         setError('Select who you wish to speak with first');
-         return;
-      }
-      if (selectedUsers.length >= 2 && !conversationName.length) {
-         setError('Group conversations need a name');
-         return;
-      }
-
-      //Create conversation
-      const conversationApi = new ConversationApi();
-      const userIds: number[] = selectedUsers.map((user) => user.id);
-      userIds.push(currentUserId);
-      const resolveCreation = () => {
-         dispatch(clearSelectedUsers());
-         dispatch(clearSelectableUsers());
-         setConversationName('');
-         dispatch(fetchConversations(currentUserId));
-         setIsCreateMode(newMode);
-      };
-      if (selectedUsers.length === 1) {
-         conversationApi
-            .createNewPersonalConversation(userIds)
-            .then((res) => {
-               console.log('conversationApi -> res', res);
-               resolveCreation();
-            })
-            .catch((error) => {
-               console.error(error);
-            });
-      } else if (selectedUsers.length >= 2) {
-         conversationApi
-            .createNewGroupConversation(userIds, conversationName)
-            .then((res) => {
-               console.log('conversationApi -> res', res);
-               resolveCreation();
-            })
-            .catch((error) => {
-               console.error(error);
-            });
-      }
+      createConversation();
    };
 
    const handleConversationNameChange = (value: string) => {
@@ -121,10 +168,7 @@ const ConversationContainer = () => {
             {isCreateMode ? (
                <ConversationUserSelector />
             ) : (
-               <ConversationSelector
-                  status={status}
-                  conversations={[...conversations, ...conversations, ...conversations]}
-               />
+               <ConversationSelector status={status} conversations={conversations} />
             )}
          </S.Display>
          <S.ControlsContainer>
