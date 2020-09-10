@@ -16,7 +16,7 @@ interface navigationState {
  * Inital state for the navigationSlice
  */
 const initialState: navigationState = {
-   selection: 'conversation',
+   selection: 'index',
 };
 
 //SLICE:
