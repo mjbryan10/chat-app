@@ -18,10 +18,16 @@ export const Form = styled.form`
    flex-flow: column nowrap;
    padding: 1em;
    position: relative;
+   width: 100%;
+   max-width: 400px;
    & input {
       margin-bottom: 3px;
    }
    & input[type='submit'] {
       margin-top: 5px;
    }
+`;
+
+export const ErorrText = styled.p<ThemeProps<Theme>>`
+   color: ${({theme})=> theme.color.danger || 'red'};
 `;
