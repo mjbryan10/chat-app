@@ -5,7 +5,7 @@ import BaseApi from '../BaseApi';
 jest.mock('axios');
 
 describe('UserApi', () => {
-   beforeEach(() => {
+   afterEach(() => {
       (axios.get as jest.Mock).mockClear();
    });
 
