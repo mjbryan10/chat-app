@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { dark, light } from './shared/theme';
-import Login from './features/login/Login';
+import LoginContainer from './features/login/LoginContainer';
 import { selectLogin } from './features/login/loginSlice';
 import { selectTheme } from './features/theme/themeSlice';
 import Navigation from 'components/Navigation';
@@ -17,7 +17,7 @@ function App() {
          <ThemeProvider theme={(theme === 'dark') ? dark : light}>
             <GlobalStyles />
             <Navigation />
-            {isAuthenticated ? <AppContainer /> : <Login />}
+            {isAuthenticated ? <AppContainer /> : <LoginContainer />}
          </ThemeProvider>
    );
 }

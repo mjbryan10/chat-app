@@ -12,12 +12,10 @@ export const ItemButton = styled.button<ButtonProps>`
       background: ${({ theme: { background }, selected }) =>
          selected ? background.conversationSelected : background.conversation};
    }
-   ${({ selected }) => {
+   ${({ selected, theme }) => {
       return selected
-         ? `-moz-box-shadow:    inset 0 0 10px #000000;
-            -webkit-box-shadow: inset 0 0 10px #000000;
-            box-shadow:         inset 0 0 10px #000000;`
-         : null;
+         ? theme.snippets.shadow.inner
+         : null
    }}
    border: ${({ color, theme }) => theme.color[color]} 1px solid;
    margin: 3px 0;

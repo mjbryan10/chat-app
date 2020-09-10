@@ -1,10 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Participant } from '../messageSlice';
 import MessageItem from '../MessageItem';
 import * as S from './styles';
 import { Message, TIME_FORMAT } from 'shared/Api/types';
 import moment from 'moment';
 import MessageDate from '../MessageDate';
+import {nanoid} from 'nanoid';
 
 interface Props {
    messages: Message[];
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const MessageList: FC<Props> = ({ messages, participants }) => {
+   const [keyId] = useState<string>(nanoid(10));
    const dates: string[] = [];
    return (
       <S.Wrapper>
@@ -28,7 +30,7 @@ const MessageList: FC<Props> = ({ messages, participants }) => {
                if (dates.includes(date)) {
                   return (
                      <MessageItem
-                        key={message.id}
+                        key={(message.id+keyId).toString()}
                         messageDetails={message}
                         userDetails={participant}
                         isChainMessage={isChain}
@@ -52,7 +54,7 @@ const MessageList: FC<Props> = ({ messages, participants }) => {
                      <>
                         <MessageDate value={value} key={value+message.id} />
                         <MessageItem
-                           key={message.id}
+                           key={keyId+message.id}
                            messageDetails={message}
                            userDetails={participant}
                            isChainMessage={isChain}
