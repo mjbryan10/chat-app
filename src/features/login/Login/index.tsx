@@ -59,27 +59,27 @@ const Login: FC = () => {
          {status === 'loading' ? (
             <Spinner />
          ) : (
-            <S.Form action="submit" onSubmit={handleSubmit} data-testid="login-form">
-               <InputTextFieldWithLabel
-                  handleChange={(value: string) => setName(value)}
-                  labelValue="Name"
-                  initialValue="Wessel"
-                  disabled
-               />
-               <InputTextFieldWithLabel
-                  handleChange={(value: string) => setId(parseInt(value))}
-                  labelValue="ID"
-                  initialValue="1"
-                  disabled
-               />
-               {isAuthenticated === false ? (
-                  <S.ErorrText>
-                     It appears we were unable to log you in with those details, please
-                     try again later.
-                  </S.ErorrText>
-               ) : null}
-               <InputSubmitButton value="Log in" />
-            </S.Form>
+               <S.Form action="submit" onSubmit={handleSubmit} data-testid="login-form">
+                  <InputTextFieldWithLabel
+                     handleChange={(value: string) => setName(value)}
+                     labelValue="Name"
+                     initialValue="Wessel"
+                     disabled
+                  />
+                  <InputTextFieldWithLabel
+                     handleChange={(value: string) => setId(parseInt(value))}
+                     labelValue="ID"
+                     initialValue="1"
+                     disabled
+                  />
+                  {isAuthenticated === false ? (
+                     <S.ErorrText>
+                        It appears we were unable to log you in with those details, please
+                        try again later.
+                     </S.ErorrText>
+                  ) : null}
+                  <InputSubmitButton value="Log in" />
+               </S.Form>
          )}
       </S.Container>
    );
