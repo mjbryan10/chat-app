@@ -12,7 +12,6 @@ export const Container = styled.div`
    width: 100%;
    min-height: 60vh;
    height: 100%;
-   overflow-y: auto;
    @media ${breakpoint.tablet} {
       max-width: 400px;
       min-width: 300px;
@@ -28,6 +27,8 @@ export const Header = styled.h2<ThemeProps<Theme>>`
 
 export const Button = styled.button<ButtonProps>`
    margin-top: auto;
+   width: 100%;
+   display: block;
    padding: 1rem;
    border: ${({ theme }) => theme.border};
    display: flex;
@@ -46,4 +47,24 @@ export const Button = styled.button<ButtonProps>`
    &:hover {
       cursor: pointer;
    }
+`;
+
+export const ControlsContainer = styled.div`
+  margin-top: auto;
+  width: 100%;
+`;
+
+export const ErrorText = styled.p<ThemeProps<Theme>>`
+  color: ${({theme}) => theme.color.danger};
+  text-align: center;
+`;
+
+export const Display = styled.div`
+  display: flex;
+   flex-flow: column nowrap;
+   align-items: center;
+   width: 100%;
+   max-height: 60vh;
+   height: 100%;
+   overflow-y: auto;
 `;
