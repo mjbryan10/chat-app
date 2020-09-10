@@ -9,7 +9,7 @@ const AppContainer = () => {
    const navigation = useSelector(selectNavigationState);
    return (
       <S.Container>
-         <S.DisplaySwitch active={navigation === 'conversation'}>
+         <S.DisplaySwitch active={navigation !== 'message'}>
             <ConversationContainer />
          </S.DisplaySwitch>
          <S.DisplaySwitch active={navigation === 'message'}>
