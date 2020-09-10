@@ -14,6 +14,7 @@ const ConversationList: FC<Props> = ({ conversations }) => {
          {conversations.map((conversation) => {
             const { conversationId } = conversation.conversation;
             colorIndex++;
+            if(colorIndex >= colorSpectrumArray.length) colorIndex = 0;
             return (
                <ConversationItem
                   conversation={conversation}
