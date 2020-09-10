@@ -32,7 +32,7 @@ const MessageCreator: FC<Props> = ({ handleSubmit, disabled = false }) => {
          <S.TextArea
             value={messageValue}
             placeholder={
-               disabled ? 'Choose a conversation first' : 'Write your message here'
+               disabled ? 'Select a conversation' : 'Type a message'
             }
             onChange={onChange}
             onKeyPress={onEnterPress}
