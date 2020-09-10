@@ -4,7 +4,7 @@ import { Conversation } from '../../shared/Api/types';
 import ConversationApi from '../../shared/Api/ConversationApi';
 import moment from 'moment';
 
-
+//TYPES:
 
 interface conversationState {
    conversations: Conversation[];
@@ -19,6 +19,9 @@ const initialState: conversationState = {
    currentConversationId: null,
    status: 'fulfilled',
 };
+
+//HELPERS:
+
 /**
  * Returns the date as a number for comparison or 0 if there was no date.
  *
@@ -86,6 +89,8 @@ export const filterConversations = (
    return result;
 };
 
+//ASYNC ACTIONS:
+
 /**
  * conversationApi for communicating with backend.
  */
@@ -99,6 +104,8 @@ export const fetchConversations = createAsyncThunk(
       return conversationApi.fetchConversationsByUserId(userId);
    }
 );
+
+//SLICE:
 
 export const conversationSlice = createSlice({
    name: 'conversation',
@@ -120,6 +127,7 @@ export const conversationSlice = createSlice({
       clearConversations(state) {
          state.conversations = [];
       },
+      
    },
    extraReducers: (builder) => {
       builder
@@ -136,9 +144,11 @@ export const conversationSlice = createSlice({
          })
          .addCase(fetchConversations.rejected, (state, action) => {
             state.status = 'rejected';
-         })
+         });
    },
 });
+
+//ACTIONS:
 
 export const {
    setCurrentConversation,
@@ -146,10 +156,15 @@ export const {
    clearConversations,
 } = conversationSlice.actions;
 
+//SELECTORS:
+
 export const selectConversations = (state: RootState) => state.conversation.conversations;
 export const selectCurrentConversation = (state: RootState) =>
    state.conversation.currentConversation;
 export const selectCurrentConversationId = (state: RootState): number | null =>
    state.conversation.currentConversationId;
 export const selectConversationStatus = (state: RootState) => state.conversation.status;
+
+//REDUCER:
+
 export default conversationSlice.reducer;

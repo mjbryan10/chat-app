@@ -160,10 +160,10 @@ export const messageSlice = createSlice({
                state.lastUpdated = now;
             }
          })
-         .addCase(fetchNewMessages.pending, (state, action) => {
+         .addCase(fetchNewMessages.pending, (state) => {
             state.status = 'pending';
          })
-         .addCase(fetchNewMessages.rejected, (state, action) => {
+         .addCase(fetchNewMessages.rejected, (state) => {
             state.status = 'rejected';
          })
 
@@ -176,10 +176,10 @@ export const messageSlice = createSlice({
             }
             state.status = 'fulfilled';
          })
-         .addCase(fetchOlderMessages.pending, (state, action) => {
+         .addCase(fetchOlderMessages.pending, (state) => {
             state.status = 'pending';
          })
-         .addCase(fetchOlderMessages.rejected, (state, action) => {
+         .addCase(fetchOlderMessages.rejected, (state) => {
             state.status = 'rejected';
          })
 
@@ -189,15 +189,14 @@ export const messageSlice = createSlice({
             if (status === 200) {
                const sortedData = sortMessages(data);
                state.messages = sortedData;
-               console.log('data', data);
             }
             state.status = 'fulfilled';
          })
-         .addCase(fetchConversationMessages.pending, (state, action) => {
+         .addCase(fetchConversationMessages.pending, (state) => {
             state.messages = [];
             state.status = 'pending';
          })
-         .addCase(fetchConversationMessages.rejected, (state, action) => {
+         .addCase(fetchConversationMessages.rejected, (state) => {
             state.status = 'rejected';
          });
    },

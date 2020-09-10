@@ -42,7 +42,7 @@ const MessageCreator: FC<Props> = ({ handleSubmit, disabled = false }) => {
          <InputSubmitButton
             value="Send"
             data-testid="message-creator-button"
-            disabled={disabled}
+            disabled={(disabled && messageValue.length > 0)}
          />
       </S.Form>
    );

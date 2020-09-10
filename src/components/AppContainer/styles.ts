@@ -9,6 +9,7 @@ export const Container = styled.main`
    display: flex;
    flex-flow: row nowrap;
    max-width: 100vw;
+   min-height: 80vh;
 `;
 
 export const DisplaySwitch = styled.div<DisplaySwitchProps>`

@@ -11,7 +11,7 @@ const Navigation = () => {
    const navigationState = useSelector(selectNavigationState);
    return (
       <S.Nav>
-         {navigationState === 'message' ? (
+         {navigationState !== 'index' ? (
             <NavigationConversationsButton />
          ) : (
             <LogoutButton />

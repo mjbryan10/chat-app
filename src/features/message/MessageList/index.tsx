@@ -50,7 +50,7 @@ const MessageList: FC<Props> = ({ messages, participants }) => {
                      }
                   return (
                      <>
-                        <MessageDate value={value} key={value} />
+                        <MessageDate value={value} key={value+message.id} />
                         <MessageItem
                            key={message.id}
                            messageDetails={message}

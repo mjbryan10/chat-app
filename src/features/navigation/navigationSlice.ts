@@ -3,7 +3,7 @@ import { RootState } from '../../app/store';
 
 //TYPES:
 
-type NavigationSelection = 'conversation' | 'message';
+type NavigationSelection = 'conversation' | 'message' | 'index';
 
 /**
  * Interface for the navigationSlice state
@@ -29,10 +29,6 @@ export const navigationSlice = createSlice({
    name: 'navigation',
    initialState,
    reducers: {
-      toggleNavigation(state) {
-         const newState = state.selection === 'conversation' ? 'message' : 'conversation';
-         state.selection = newState;
-      },
       setNavigationState(state, action) {
         state.selection = action.payload;
       }
@@ -41,7 +37,7 @@ export const navigationSlice = createSlice({
 
 //EXPORTS:
 
-export const {toggleNavigation, setNavigationState } = navigationSlice.actions;
+export const { setNavigationState } = navigationSlice.actions;
 
 /**
  * Returns the current state of navigation from the store

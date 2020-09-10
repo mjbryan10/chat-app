@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react'
+import React from 'react'
 import { setNavigationState } from '../navigationSlice';
 import { useDispatch } from 'react-redux';
 import { clearCurrentConversation } from 'features/conversation/conversationSlice';
@@ -9,7 +9,7 @@ import {IoMdArrowBack} from 'react-icons/io'
 const NavigationConversationsButton = () => {
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(setNavigationState('conversation'));
+    dispatch(setNavigationState('index'));
     dispatch(clearCurrentConversation());
     dispatch(resetMessages());
   }
