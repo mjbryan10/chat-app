@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 import { logoutUser } from '../loginSlice';
 import { useDispatch } from 'react-redux';
 import ButtonNavbarIcon from 'components/ButtonNavbarIcon';
