@@ -23,12 +23,13 @@ const MessageItem: FC<Props> = ({
 }) => {
    const {color, isOwner, name} = userDetails;
    const {timestamp, message } = messageDetails;
+   console.log('timestamp', timestamp);
    return (
       <S.Container color={color} isChained={isChainMessage} isOwner={isOwner}>
          <S.Header color={color}>
             <S.Detail>{isOwner ? 'You' : name}</S.Detail>
             <S.Detail>
-               {moment(timestamp, 'YYYY-MM-DD HH:mm:ss').format('hh:mm')}
+               {moment(timestamp, 'YYYY-MM-DD HH:mm:ss').format('HH:mm')}
             </S.Detail>
          </S.Header>
          <S.Body>{message}</S.Body>
