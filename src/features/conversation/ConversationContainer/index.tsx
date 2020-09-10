@@ -65,10 +65,12 @@ const ConversationContainer = () => {
     */
    useEffect(() => {
       if (navigationState === 'index' && isCreateMode) {
+         dispatch(clearSelectedUsers());
+         dispatch(clearSelectableUsers());
          setError('');
          setIsCreateMode(false);
       }
-   }, [isCreateMode, navigationState]);
+   }, [dispatch, isCreateMode, navigationState]);
 
    //METHODS:
 
@@ -82,6 +84,7 @@ const ConversationContainer = () => {
       setIsCreateMode(newMode);
       if (newMode) {
          dispatch(setNavigationState('conversation'));
+         dispatch(clearConversations());
       }
    };
    /**
