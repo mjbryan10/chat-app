@@ -7,6 +7,7 @@ const backgroundPattern = `#4E5358 url("data:image/svg+xml,%3Csvg xmlns='http://
 
 
 const darkTheme: Theme = {
+   type: 'dark',
    color: { ...defaultColors, text: '#fff', owner: '#fff' },
    background: {
       page: `linear-gradient(180deg, rgba(52,58,64,1) 0%, rgba(41,46,48,1) 100%)`,

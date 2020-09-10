@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import * as S from './styles';
+import {AiOutlineCloseSquare} from 'react-icons/ai';
 import Avatar, { Props as AvatarProps } from '../Avatar';
+import * as S from './styles';
 
 interface Props extends AvatarProps {
   selected?: boolean;
@@ -23,10 +24,10 @@ const AvatarWithLabelAndDelete: FC<Props> = ({
 
   }
    return (
-      <S.Label selected={selected} onClick={onClick}>
-         <S.DeleteIcon />
+      <S.Label selected={selected} onClick={onClick} color={color}>
+         <S.DeleteIcon><AiOutlineCloseSquare/></S.DeleteIcon>
          <Avatar title={title} size={size} color={color} />
-         <span>{title?.split(' ')[0]}</span>
+         <S.Title color={color}>{title?.split(' ')[0]}</S.Title>
       </S.Label>
    );
 };

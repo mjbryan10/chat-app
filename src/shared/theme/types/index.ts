@@ -102,6 +102,7 @@ declare module 'styled-components' {
     * Theme interface
     */
    export interface Theme {
+      type: ThemeName;
       color: ThemeColors;
       background: ThemeBackgrounds;
       border: string;
