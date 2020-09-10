@@ -14,3 +14,10 @@ export const defaultTransitions = {
    transition: all 1s ease;
  `,
 };
+
+
+export const defaultInnerShadow = `
+  -moz-box-shadow:    inset 0 0 5px #000000;
+  -webkit-box-shadow: inset 0 0 5px #000000;
+  box-shadow:         inset 0 0 5px #000000;
+`;
