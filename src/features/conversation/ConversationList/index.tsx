@@ -1,12 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import ConversationItem from '../ConversationItem';
 import { colorSpectrumArray } from 'shared/theme/types';
 import { Conversation } from 'shared/Api/types';
+import { nanoid } from '@reduxjs/toolkit';
 
 interface Props {
    conversations: Conversation[];
 }
 const ConversationList: FC<Props> = ({ conversations }) => {
+   const [keyId] = useState(nanoid(5));
    const colors = colorSpectrumArray;
    let colorIndex = -1;
    return (
@@ -18,7 +20,7 @@ const ConversationList: FC<Props> = ({ conversations }) => {
             return (
                <ConversationItem
                   conversation={conversation}
-                  key={conversationId}
+                  key={conversationId+keyId}
                   color={colors[colorIndex]}
                />
             );

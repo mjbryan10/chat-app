@@ -10,11 +10,12 @@ export const Container = styled.div`
    flex-flow: column nowrap;
    align-items: center;
    width: 100%;
+   max-width: 95vw;
    min-height: 60vh;
    height: 100%;
    @media ${breakpoint.tablet} {
-      max-width: 400px;
-      min-width: 300px;
+      max-width: 350px;
+      min-width: 350px;
    }
 `;
 

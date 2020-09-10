@@ -2,6 +2,8 @@ import React, { FC, useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { User } from 'shared/Api/types';
 import AvatarWithLabelAndDelete from 'components/AvatarWithLabelAndDelete';
+import { colorSpectrumArray } from 'shared/theme/types';
+import * as S from './styles';
 
 interface Props {
    users: User[];
@@ -14,17 +16,25 @@ const UserListWithDeleteAvatar: FC<Props> = ({ users, handleClick }) => {
    useEffect(() => {
       setUsersState(users);
    }, [users]);
+
+   const [colors] = useState(colorSpectrumArray);
+   let colorIndex = -1;
    return (
-      <div>
-         {usersState.map((user) => (
-            <AvatarWithLabelAndDelete
-               key={user.id + keyId}
-               userId={user.id}
-               title={user.name}
-               handleClick={() => handleClick(user)}
-            />
-         ))}
-      </div>
+      <S.Container>
+         {usersState.map((user) => {
+            colorIndex++;
+            if (colorIndex >= colorSpectrumArray.length) colorIndex = 0;
+            return (
+               <AvatarWithLabelAndDelete
+                  key={user.id + keyId}
+                  userId={user.id}
+                  title={user.name}
+                  handleClick={() => handleClick(user)}
+                  color={colors[colorIndex]}
+               />
+            );
+         })}
+      </S.Container>
    );
 };
 
