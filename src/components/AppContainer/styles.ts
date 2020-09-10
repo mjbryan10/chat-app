@@ -14,9 +14,10 @@ export const Container = styled.main`
 
 export const DisplaySwitch = styled.div<DisplaySwitchProps>`
    display: ${({ active }) => (active ? 'block' : 'none')};
-   width: 100%;
-   margin: 1rem;
+   width: 95%;
+   margin: 1em auto;
    @media ${breakpoint.tablet} {
+      margin: 1rem;
       display: block;
       width: auto;
       &:last-of-type {
