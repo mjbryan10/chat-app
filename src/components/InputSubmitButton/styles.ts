@@ -13,6 +13,7 @@ export const Input = styled.input`
    text-shadow: 0px 0px 5px rgba(0,0,0,0.3);
    &:hover {
       cursor: pointer;
+      ${({theme}) => theme.snippets.shadow.inner}
    }
    &:disabled {
       cursor: auto;
