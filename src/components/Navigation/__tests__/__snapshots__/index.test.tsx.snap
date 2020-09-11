@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation Component should render correctly 1`] = `
+<DocumentFragment>
+  <nav
+    class="sc-AxjAm bjWIXH"
+  >
+    <button
+      class="sc-AxheI cpEQhe"
+      data-testid="button-navbar-icon"
+    >
+      <svg
+        data-testid="navigation-button-back"
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 512 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M427 234.625H167.296l119.702-119.702L256 85 85 256l171 171 29.922-29.924-118.626-119.701H427v-42.75z"
+        />
+      </svg>
+    </button>
+    <h1
+      class="sc-Axmtr RycXh"
+    >
+      Welcome to Ch@
+    </h1>
+    <div
+      class="sc-AxhUy eRBRnr"
+    >
+      <button
+        class="sc-AxheI cpEQhe"
+        data-testid="button-navbar-icon"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M195 125c0-26.3 5.3-51.3 14.9-74.1C118.7 73 51 155.1 51 253c0 114.8 93.2 208 208 208 97.9 0 180-67.7 202.1-158.9-22.8 9.6-47.9 14.9-74.1 14.9-106 0-192-86-192-192z"
+          />
+        </svg>
+      </button>
+    </div>
+  </nav>
+</DocumentFragment>
+`;

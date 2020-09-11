@@ -14,7 +14,7 @@ const LogoutButton = () => {
    };
    return (
       <ButtonNavbarIcon handleClick={handleClick}>
-         <IoMdPower />
+         <IoMdPower data-testid="navigation-button-logout" />
       </ButtonNavbarIcon>
    );
 };

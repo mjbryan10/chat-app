@@ -1,37 +1,38 @@
 import React from 'react';
-import Avatar, { stringToCaptialLetter } from '..';
+import Avatar from '..';
 import { render } from 'testing-utils';
+import { stringToCaptialLetter } from '../helpers';
 
 describe('Avatar component', () => {
-  
-  describe('stringToCaptialLetter', () => {
-    test('should return the first letter captalised', () => {
-      const testText = 'test';
-      
-      const result = stringToCaptialLetter(testText)
+   describe('stringToCaptialLetter', () => {
+      test('should return the first letter captalised', () => {
+         const testText = 'test';
 
-      expect(result).toEqual('T');
-    });
-    
-    
-  })
+         const result = stringToCaptialLetter(testText);
 
-  test('should render an Avatar with `A` if no text provided', () => {
-    const utils = render(<Avatar/>)
+         expect(result).toEqual('T');
+      });
+   });
 
-    const innerContainer = utils.getByTestId('avatar-inner-container');
+   test('should render an Avatar with `A` if no text provided', () => {
+      const utils = render(<Avatar />);
 
-    expect(innerContainer.innerHTML).toEqual('A');
-  });
+      const innerContainer = utils.getByTestId('avatar-inner-container');
 
-  test('should render the first letter captalised only', () => {
-    const utils = render(<Avatar title="Demo name or message"/>)
+      expect(innerContainer.innerHTML).toEqual('A');
+   });
 
-    const innerContainer = utils.getByTestId('avatar-inner-container');
+   test('should render the first letter captalised only', () => {
+      const utils = render(<Avatar title="Demo name or message" />);
 
-    expect(innerContainer.innerHTML).toEqual('D');
-  })
-  
-  
+      const innerContainer = utils.getByTestId('avatar-inner-container');
 
-})
+      expect(innerContainer.innerHTML).toEqual('D');
+   });
+
+   test('should render correctly', () => {
+      const { asFragment } = render(<Avatar />);
+
+      expect(asFragment()).toMatchSnapshot();
+   });
+});

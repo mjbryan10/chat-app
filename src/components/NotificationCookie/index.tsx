@@ -18,7 +18,7 @@ const NotificationCookie: FC<Props> = ({ handleClick }) => {
          <S.TextBox>
             This website makes use of functional cookies. Please confirm your acceptance.
          </S.TextBox>
-         <S.ConfirmationButton onClick={onClick}>
+         <S.ConfirmationButton data-testid="cookie-accept-button" onClick={onClick}>
             <AiOutlineCheckSquare size="3rem" />
          </S.ConfirmationButton>
       </S.NoticeContainer>

@@ -15,7 +15,7 @@ const NavigationConversationsButton = () => {
   }
   return (
     <ButtonNavbarIcon handleClick={handleClick}>
-      <IoMdArrowBack />
+      <IoMdArrowBack data-testid="navigation-button-back" />
     </ButtonNavbarIcon>
   )
 }

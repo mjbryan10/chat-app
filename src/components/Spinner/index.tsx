@@ -1,6 +1,5 @@
 import React from 'react';
 import './styles.css';
-//TODO: Add spinner styles and functionality.
 
 /**
 * Usage under MIT lisence

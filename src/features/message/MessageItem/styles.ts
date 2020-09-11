@@ -1,4 +1,5 @@
 import styled, { ThemeColor, ThemeProps, Theme } from 'styled-components';
+import {breakpoint} from 'shared/styles/Variables';
 
 interface ContainerProps extends ThemeProps<Theme> {
    color: ThemeColor;
@@ -20,11 +21,11 @@ const colorProp = ({ theme, color }: HeaderProps) => {
 export const Container = styled.div<ContainerProps>`
    background: ${({ theme }: ContainerProps) => theme.background.message ?? 'inherit'};
    border: ${colorOrOwner} 1.5px solid;
-   min-width: 30%;
+   min-width: 150px;
    max-width: 800px;
    margin: 5px;
    ${({ isOwner }) =>
-      isOwner ? `margin: 5px 5px 5px auto;` : `margin: 5px auto 5px 5px;`}
+      isOwner ? `margin: 15px 5px 5px auto;` : `margin: 15px auto 5px 5px;`}
    &::after {
       display: block;
       content: ' ';
@@ -35,6 +36,9 @@ export const Container = styled.div<ContainerProps>`
       margin: 0 -1.5px -10px -1.5px;
       ${({ isOwner }) => (isOwner ? `transform: rotateY(180deg); margin-right: -1.5px;` : null)}
       ${({ isChained }) => (isChained ? 'display: none;' : null)}
+   }
+   @media ${breakpoint.tablet} {
+      min-width: 30%;
    }
 `;
 

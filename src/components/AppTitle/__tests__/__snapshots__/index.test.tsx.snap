@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppTitle Component should render correctly 1`] = `
+<DocumentFragment>
+  <h1
+    class="sc-AxjAm caAEPc"
+  >
+    Welcome to Ch@
+  </h1>
+</DocumentFragment>
+`;

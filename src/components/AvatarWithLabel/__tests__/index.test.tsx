@@ -5,17 +5,19 @@ import AvatarWithLabel from '..';
 describe('AvatarWithLabel component', () => {
    test('should render label if provided in props', () => {
       const testText = 'test label text';
-      const utils = render(<AvatarWithLabel title={testText} />);
+      const {getByText} = render(<AvatarWithLabel title={testText} />);
 
-      const label = utils.getByText(testText);
-
-      expect(label).toBeTruthy();
+      expect(getByText(testText)).toBeVisible();
    });
    test('should render label even if no label text provided', () => {
-      const utils = render(<AvatarWithLabel />);
+      const {getByTestId} = render(<AvatarWithLabel />);
 
-      const innerContainer = utils.getByTestId('avatar-inner-container');
+      expect(getByTestId('avatar-inner-container')).toBeVisible();
+   });
+   
+   test('should render correctly', () => {
+      const { asFragment } = render(<AvatarWithLabel />);
 
-      expect(innerContainer).toBeTruthy();
+      expect(asFragment()).toMatchSnapshot();
    });
 });

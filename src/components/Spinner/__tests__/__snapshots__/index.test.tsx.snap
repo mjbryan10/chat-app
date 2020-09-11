@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner Component should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <div
+      class="self-building-square-spinner"
+    >
+      <div
+        class="square"
+      />
+      <div
+        class="square"
+      />
+      <div
+        class="square"
+      />
+      <div
+        class="square clear"
+      />
+      <div
+        class="square"
+      />
+      <div
+        class="square"
+      />
+      <div
+        class="square clear"
+      />
+      <div
+        class="square"
+      />
+      <div
+        class="square"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

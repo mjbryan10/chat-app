@@ -28,7 +28,7 @@ const ConversationContainer = () => {
    const conversations = useSelector(selectConversations);
    const { id: currentUserId } = useSelector(selectLogin);
    const status = useSelector(selectConversationStatus);
-   const selectedUsers = useSelector(selectSelectedUsers); //TODO:
+   const selectedUsers = useSelector(selectSelectedUsers);
    const navigationState = useSelector(selectNavigationState);
    const dispatch = useDispatch();
 
@@ -171,7 +171,7 @@ const ConversationContainer = () => {
             {isCreateMode ? (
                <ConversationUserSelector />
             ) : (
-               <ConversationSelector status={status} conversations={conversations} />
+               <ConversationSelector status={status} conversations={conversations} data-testid="conversation-selector" />
             )}
          </S.Display>
          <S.ControlsContainer>
@@ -179,6 +179,7 @@ const ConversationContainer = () => {
                <InputTextFieldWithLabel
                   labelValue="Group Name"
                   handleChange={handleConversationNameChange}
+                  data-testid="conversation-name-input"
                />
             ) : null}
             {error.length ? <S.ErrorText>{error}</S.ErrorText> : null}
