@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConversationList Feature Component should render correctly 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-AxjAm jJUWfx"
+    color="blue"
+    data-testid="conversation-item-button"
+  >
+    <div
+      class="sc-AxirZ uACJY"
+      color="blue"
+    >
+      <div
+        class="sc-AxiKw cefOCi"
+        color="blue"
+        size="50"
+      >
+        <span
+          class="sc-AxhCb jPjWba"
+          data-testid="avatar-inner-container"
+          size="50"
+        >
+          L
+        </span>
+      </div>
+      <h3
+        data-testid="avatar-with-label-span"
+      >
+        Loading..
+      </h3>
+    </div>
+  </button>
+  <button
+    class="sc-AxjAm kpMVKU"
+    color="red"
+    data-testid="conversation-item-button"
+  >
+    <div
+      class="sc-AxirZ knpAQZ"
+      color="red"
+    >
+      <div
+        class="sc-AxiKw gVga-dC"
+        color="red"
+        size="50"
+      >
+        <span
+          class="sc-AxhCb jPjWba"
+          data-testid="avatar-inner-container"
+          size="50"
+        >
+          L
+        </span>
+      </div>
+      <h3
+        data-testid="avatar-with-label-span"
+      >
+        Loading..
+      </h3>
+    </div>
+  </button>
+</DocumentFragment>
+`;

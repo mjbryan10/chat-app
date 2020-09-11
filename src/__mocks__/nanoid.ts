@@ -1,1 +1,3 @@
-export default jest.fn(() => 'nanoid' + Math.floor(Math.random() * 10));
+export default {
+   nanoid: jest.fn(() => 'nanoid' + Math.floor(Math.random() * 10)),
+};
