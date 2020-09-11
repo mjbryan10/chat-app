@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Component should render correctly 1`] = `
+<DocumentFragment>
+  <form
+    action="submit"
+    class="sc-AxhUy hyKAMG"
+    data-testid="login-form"
+  >
+    <label
+      class="sc-AxirZ jSgOQo"
+    >
+      Name
+      <input
+        class="sc-AxjAm kuGIAZ"
+        data-testid="input-text-field"
+        placeholder=""
+        value="wessel"
+      />
+    </label>
+    <label
+      class="sc-AxirZ jSgOQo"
+    >
+      ID
+      <input
+        class="sc-AxjAm kuGIAZ"
+        data-testid="input-text-field"
+        placeholder=""
+        value="1"
+      />
+    </label>
+    <input
+      class="sc-AxiKw joUDrS"
+      data-testid="input-submit-button"
+      type="submit"
+      value="Log in"
+    />
+  </form>
+</DocumentFragment>
+`;

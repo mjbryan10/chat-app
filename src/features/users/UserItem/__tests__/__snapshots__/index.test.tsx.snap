@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserItem Feature Component should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-AxjAm fNKPyA"
+    data-testid="user-item"
+  >
+    Wessel
+  </div>
+</DocumentFragment>
+`;

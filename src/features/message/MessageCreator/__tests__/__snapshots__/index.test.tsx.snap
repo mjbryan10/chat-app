@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageCreator component should render correctly 1`] = `
+<DocumentFragment>
+  <form
+    class="sc-AxiKw jlHJyN"
+    data-testid="message-creator-form"
+  >
+    <textarea
+      class="sc-AxirZ gaLhWH"
+      data-testid="message-creator-textbox"
+      placeholder="Type a message"
+    />
+    <input
+      class="sc-AxjAm ernPVN"
+      data-testid="input-submit-button"
+      type="submit"
+      value="Send"
+    />
+  </form>
+</DocumentFragment>
+`;

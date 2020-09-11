@@ -78,4 +78,10 @@ describe('MessageList Date Specific', () => {
 
       expect(getByText(/1 september 2020/i)).toBeVisible();
    });
+
+   test('should render correctly', () => {
+      const { asFragment } = utils;
+   
+      expect(asFragment()).toMatchSnapshot();
+   });
 });
