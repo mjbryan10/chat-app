@@ -58,7 +58,7 @@ const ConversationUserSelector = () => {
    };
 
    return (
-      <div>
+      <div data-testid="conversation-user-selector">
          <UserListWithDeleteAvatar
             users={sortUsers(selectedUsers)}
             handleClick={toggleUserSelection}
