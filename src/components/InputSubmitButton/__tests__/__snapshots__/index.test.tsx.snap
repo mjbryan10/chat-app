@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputSubmitButton should render correctly 1`] = `
+<DocumentFragment>
+  <input
+    class="sc-AxjAm ernPVN"
+    data-testid="input-submit-button"
+    type="submit"
+    value="Given text"
+  />
+</DocumentFragment>
+`;
