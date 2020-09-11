@@ -7,6 +7,8 @@ jest.mock('axios', () => ({
    post: jest.fn(),
 }));
 
+jest.mock('nanoid', () => ({ nanoid: () => jest.fn() }));
+
 describe('ConversationContainer Feature Component', () => {
    let utils: RenderResult;
    beforeEach(() => {
@@ -36,18 +38,9 @@ describe('ConversationContainer Feature Component', () => {
       expect(getByTestId('conversation-user-selector')).toBeVisible();
    });
 
-   test('should not display group name input whilst conversation selector visible', () => {
-    const { getByTestId } = utils;
-    
-    expect(getByTestId('conversation-name-input')).not.toBeVisible();
-   })
-   
-
-
    test('should render correctly', () => {
-    const { asFragment } = render(<ConversationContainer />);
- 
-    expect(asFragment()).toMatchSnapshot();
- });
- 
+      const { asFragment } = render(<ConversationContainer />);
+
+      expect(asFragment()).toMatchSnapshot();
+   });
 });
