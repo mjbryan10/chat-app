@@ -18,10 +18,10 @@ const MessageList: FC<Props> = ({ messages, participants }) => {
    return (
       <S.Wrapper>
          {messages.map((message, index) => {
-            const time = moment(message.timestamp, TIME_FORMAT);
+            const time = moment.utc(message.timestamp, TIME_FORMAT).local();
             const date = time.format('DD-MM-YYYY');
-            const now = moment();
-            const today = moment().format('DD-MM-YYYY');
+            const now = moment.utc().local();
+            const today = now.format('DD-MM-YYYY');
 
             const participant = participants.find((user) => user.id === message.senderId);
             if (participant) {
@@ -47,7 +47,7 @@ const MessageList: FC<Props> = ({ messages, participants }) => {
                            value = 'Yesterday';
                            break;
                         default:
-                           value = today;
+                           value = date;
                            break;
                      }
                   return (
