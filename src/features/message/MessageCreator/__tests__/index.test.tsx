@@ -62,7 +62,7 @@ describe('MessageCreator component', () => {
       expect(__handleSubmit).toBeCalledTimes(1);
       expect(textbox).toHaveDisplayValue('');
    });
- //TODO: Revisit
+
    test('should submit to handler on `Enter` keypress', () => {
       cleanup();
       const __handleSubmit = jest.fn();
@@ -104,5 +104,11 @@ describe('MessageCreator component', () => {
 
       expect(__handleSubmit).toBeCalledTimes(0);
       expect(textbox).toHaveDisplayValue('');
+   });
+
+   test('should render correctly', () => {
+      const { asFragment } = render(<MessageCreator />);
+   
+      expect(asFragment()).toMatchSnapshot();
    });
 });

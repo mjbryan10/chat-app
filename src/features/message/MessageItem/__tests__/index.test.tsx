@@ -48,5 +48,11 @@ describe('MessageItem Component', () => {
 
          expect(getByText(/'Wessel'/i)).toBeVisible();
       });
+
+      test('should render correctly', () => {
+         const { asFragment } = utils;
+      
+         expect(asFragment()).toMatchSnapshot();
+      });
    });
 });

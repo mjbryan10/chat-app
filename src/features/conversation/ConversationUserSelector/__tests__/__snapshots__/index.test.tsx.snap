@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConversationUserSelector Feature Component should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="conversation-user-selector"
+  >
+    <div
+      class="sc-AxgMl geMXAO"
+    />
+    <div
+      class="sc-fzoLsD jffnQx"
+    >
+      <label
+        class="sc-fzozJi eXKbNi"
+      >
+        Search
+        <input
+          class="sc-AxmLO iKzMPF"
+          data-testid="input-text-field"
+          placeholder="Search for a user"
+          value=""
+        />
+      </label>
+      <ul
+        class="sc-Axmtr begSdA"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

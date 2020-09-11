@@ -27,5 +27,10 @@ describe('UserItem Feature Component', () => {
     expect(__handleClick).toBeCalledTimes(1);
   })
   
+  test('should render correctly', () => {
+    const { asFragment } = utils;
+ 
+    expect(asFragment()).toMatchSnapshot();
+ });
   
 })

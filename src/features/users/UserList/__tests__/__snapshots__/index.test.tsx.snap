@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UsersList Feature Component should render correctly 1`] = `
+<DocumentFragment>
+  <ul
+    class="sc-AxirZ kPHIsu"
+  >
+    <li>
+      <div
+        class="sc-AxjAm fNKPyA"
+        data-testid="user-item"
+      >
+        Wessel
+      </div>
+    </li>
+    <li>
+      <div
+        class="sc-AxjAm fNKPyA"
+        data-testid="user-item"
+      >
+        Quint
+      </div>
+    </li>
+    <li>
+      <div
+        class="sc-AxjAm fNKPyA"
+        data-testid="user-item"
+      >
+        Mani
+      </div>
+    </li>
+  </ul>
+</DocumentFragment>
+`;

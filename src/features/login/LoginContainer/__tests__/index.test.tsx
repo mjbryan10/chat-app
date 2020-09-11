@@ -2,22 +2,23 @@ import React from 'react';
 import Login from '..';
 import { render, fireEvent } from 'testing-utils';
 import axios from 'axios';
-import { Provider } from 'react-redux';
-import { store } from '../../../../app/store';
+import jwt from 'jsonwebtoken';
 
+jest.mock('jsonwebtoken', () => ({
+   verify: jest.fn(() => {
+      throw new Error();
+   }),
+   sign: jest.fn()
+}));
 jest.mock('axios');
 
 describe('Login Component', () => {
    beforeEach(() => {
       (axios.get as jest.Mock).mockClear();
    });
-
+   afterAll(() => jest.clearAllMocks());
    const setup = () => {
-      const utils = render(
-         <Provider store={store}>
-            <Login />
-         </Provider>
-      );
+      const utils = render(<Login />);
       const nameInput = utils.getAllByTestId('input-text-field')[0];
       const idInput = utils.getAllByTestId('input-text-field')[1];
       const submitButton = utils.getByTestId('input-submit-button');
@@ -39,5 +40,11 @@ describe('Login Component', () => {
       fireEvent.click(submitButton);
 
       expect(axios.get).toBeCalledTimes(1);
+   });
+
+   test('should render correctly', () => {
+      const { asFragment } = render(<Login />);
+
+      expect(asFragment()).toMatchSnapshot();
    });
 });

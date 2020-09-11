@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageItem Component MessageItem intial render should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-AxjAm ljuivB"
+    color="red"
+  >
+    <div
+      class="sc-AxirZ iCpfoH"
+      color="red"
+    >
+      <span
+        class="sc-AxiKw BLeyf"
+      >
+        You
+      </span>
+      <span
+        class="sc-AxiKw BLeyf"
+      >
+        10:15
+      </span>
+    </div>
+    <div
+      class="sc-AxhCb fpilma"
+    >
+      The first message
+    </div>
+  </div>
+</DocumentFragment>
+`;

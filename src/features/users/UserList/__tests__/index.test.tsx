@@ -47,4 +47,10 @@ describe('UsersList Feature Component', () => {
       expect(__handleItemClick).toBeCalledTimes(1);
       expect(__handleItemClick).toBeCalledWith(__users[0]);
    });
+
+   test('should render correctly', () => {
+      const { asFragment } = utils;
+   
+      expect(asFragment()).toMatchSnapshot();
+   });
 });

@@ -1,17 +1,11 @@
 import React from 'react';
 import Cookies from 'js-cookie';
-import { Provider } from 'react-redux';
 import ThemeToggle from '..';
-import { store } from '../../../../app/store';
 import { render, fireEvent, cleanup } from 'testing-utils';
 
 jest.mock('js-cookie');
 const setup = () => {
-   const utils = render(
-      <Provider store={store}>
-         <ThemeToggle />
-      </Provider>
-   );
+   const utils = render(<ThemeToggle />);
    const checkbox = utils.getByTestId('theme-toggle-checkbox');
    return { checkbox, ...utils };
 };
@@ -49,25 +43,25 @@ describe('ThemeToggle', () => {
    });
 
    test('should change theme cookie on toggle light->dark', () => {
-    const getSpy = jest
-       .spyOn(Cookies, 'get')
-       .mockReturnValueOnce({ theme: 'light' })
-       .mockReturnValueOnce({ theme: 'dark' });
-    const setSpy = jest.spyOn(Cookies, 'set');
-    const { checkbox } = setup();
+      const getSpy = jest
+         .spyOn(Cookies, 'get')
+         .mockReturnValueOnce({ theme: 'light' })
+         .mockReturnValueOnce({ theme: 'dark' });
+      const setSpy = jest.spyOn(Cookies, 'set');
+      const { checkbox } = setup();
 
-    fireEvent.click(checkbox);
+      fireEvent.click(checkbox);
 
-    //get
-    expect(getSpy).toBeCalledWith('theme');
-    expect(getSpy).toBeCalledTimes(2);
-    //set
-    expect(setSpy).toBeCalledWith('theme', 'dark', { expires: 7 });
-    expect(setSpy).toBeCalledTimes(1);
+      //get
+      expect(getSpy).toBeCalledWith('theme');
+      expect(getSpy).toBeCalledTimes(2);
+      //set
+      expect(setSpy).toBeCalledWith('theme', 'dark', { expires: 7 });
+      expect(setSpy).toBeCalledTimes(1);
 
-    getSpy.mockRestore();
-    setSpy.mockRestore();
- });
+      getSpy.mockRestore();
+      setSpy.mockRestore();
+   });
 
    test('should be set to dark if no cookie found', () => {
       const getSpy = jest.spyOn(Cookies, 'get').mockReturnValue(undefined as any);
@@ -86,24 +80,9 @@ describe('ThemeToggle', () => {
       setSpy.mockRestore();
    });
 
-   test('should uncheck itself if cookie is `light`', () => {
-      const getSpy = jest.spyOn(Cookies, 'get').mockReturnValue({ theme: 'light' });
-      const setSpy = jest.spyOn(Cookies, 'set');
+   test('should render correctly', () => {
+      const { asFragment } = setup();
 
-      // const { checkbox } = setup(); //TODO: resolve issue with checked value
-      setup();
-      //-- 
-
-      // Assert
-      expect(getSpy).toBeCalledWith('theme');
-      expect(getSpy).toBeCalledTimes(1);
-      //--
-      expect(setSpy).toBeCalledTimes(0);
-      //--
-      // expect(checkbox).not.toBeChecked();//TODO: not recognising checked value
-
-      // Cleanup
-      getSpy.mockRestore();
-      setSpy.mockRestore();
+      expect(asFragment()).toMatchSnapshot();
    });
 });

@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UsersContainer Feature Component should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-AxhUy cDelPw"
+  >
+    <label
+      class="sc-AxhCb dLEHOo"
+    >
+      Search
+      <input
+        class="sc-AxiKw xZNbK"
+        data-testid="input-text-field"
+        placeholder="Search for a user"
+        value=""
+      />
+    </label>
+    <ul
+      class="sc-AxirZ kPHIsu"
+    >
+      <li>
+        <div
+          class="sc-AxjAm fNKPyA"
+          data-testid="user-item"
+        >
+          Wessel
+        </div>
+      </li>
+      <li>
+        <div
+          class="sc-AxjAm fNKPyA"
+          data-testid="user-item"
+        >
+          Quint
+        </div>
+      </li>
+      <li>
+        <div
+          class="sc-AxjAm fNKPyA"
+          data-testid="user-item"
+        >
+          Mani
+        </div>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
