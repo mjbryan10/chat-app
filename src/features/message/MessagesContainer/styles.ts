@@ -26,3 +26,9 @@ export const LoadingContainer = styled.div`
   left: 0;
   margin: 0 10px;
 `;
+
+export const NoMessageNotice = styled.p<ThemeProps<Theme>>`
+  width: 100%;
+  text-align: center;
+  color: ${({theme}) => theme.color.text};
+`;

@@ -161,7 +161,7 @@ const MessagesContainer = () => {
             {messages.length && participants.length ? (
                <MessageList messages={messages} participants={participants} />
             ) : loadingStatus !== 'idle' ? (
-               <p>No messages yet.</p>
+               <S.NoMessageNotice>No messages yet</S.NoMessageNotice>
             ) : null}
             {loadingStatus === 'pending' ? (
                <S.LoadingContainer>
