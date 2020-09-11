@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, RenderResult } from 'testing-utils';
+import { render, cleanup } from 'testing-utils';
 import AppTitle from '..';
 import { useSelector } from 'react-redux';
 
@@ -42,4 +42,11 @@ describe('AppTitle Component', () => {
       expect(useSelector).toBeCalled();
       expect(getByText(/private/i)).toBeVisible();
    });
+
+   test('should render correctly', () => {
+    const { asFragment } = render(<AppTitle />);
+    
+    expect(asFragment()).toMatchSnapshot();
+   })
+   
 });
