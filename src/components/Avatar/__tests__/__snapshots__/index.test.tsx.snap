@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar component should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-AxjAm kLuhel"
+    color="text"
+    size="50"
+  >
+    <span
+      class="sc-AxirZ dsXsoK"
+      data-testid="avatar-inner-container"
+      size="50"
+    >
+      A
+    </span>
+  </div>
+</DocumentFragment>
+`;

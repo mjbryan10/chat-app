@@ -1,3 +1,81 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AppContainer Component should render correctly 1`] = `<DocumentFragment />`;
+exports[`AppContainer Component should render correctly 1`] = `
+<DocumentFragment>
+  <main
+    class="sc-AxjAm eeUVjI"
+  >
+    <div
+      class="sc-AxirZ gFsXol"
+    >
+      <div
+        class="sc-fzokOt hwomJI"
+      >
+        <h2
+          class="sc-fzqBZW kFYROT"
+        >
+          Conversations
+        </h2>
+        <div
+          class="sc-fzoXzr hCDWur"
+        />
+        <div
+          class="sc-fzoyAV joLyXM"
+        >
+          <button
+            class="sc-fzqNJr dVPdEh"
+          >
+            <svg
+              fill="currentColor"
+              height="3rem"
+              stroke="currentColor"
+              stroke-width="0"
+              viewBox="0 0 1024 1024"
+              width="3rem"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M328 544h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8z"
+              />
+              <path
+                d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+              />
+            </svg>
+            Create new conversation
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="sc-AxirZ hAsYYO"
+    >
+      <div
+        class="sc-fzplWN cUeYUu"
+      >
+        <div
+          class="sc-fznyAO hCupfQ"
+        >
+          <div />
+        </div>
+        <form
+          class="sc-fzpans bpFApF"
+          data-testid="message-creator-form"
+        >
+          <textarea
+            class="sc-fzoLsD hnRPQP"
+            data-testid="message-creator-textbox"
+            disabled=""
+            placeholder="Select a conversation"
+          />
+          <input
+            class="sc-fzozJi PbjRk"
+            data-testid="input-submit-button"
+            type="submit"
+            value="Send"
+          />
+        </form>
+      </div>
+    </div>
+  </main>
+</DocumentFragment>
+`;

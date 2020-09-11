@@ -10,13 +10,18 @@ export interface Props {
 }
 
 const ButtonNavbarIcon: FC<Props> = ({ children, height, width, color, handleClick }) => {
-
    const onClick = (event: SyntheticEvent<HTMLButtonElement>) => {
       event.preventDefault();
       if (handleClick) handleClick();
    };
    return (
-      <S.Button height={height} width={width} color={color} onClick={onClick}>
+      <S.Button
+         height={height}
+         width={width}
+         color={color}
+         onClick={onClick}
+         data-testid="button-navbar-icon"
+      >
          {children}
       </S.Button>
    );
