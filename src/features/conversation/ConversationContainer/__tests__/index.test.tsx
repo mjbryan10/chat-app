@@ -1,7 +1,6 @@
 import React from 'react';
 import ConversationContainer from '..';
 import { render, RenderResult, cleanup, fireEvent } from 'testing-utils';
-import axios from 'axios';
 import { act } from 'react-dom/test-utils';
 
 jest.mock('axios', () => ({
@@ -40,7 +39,6 @@ describe('ConversationContainer Feature Component', () => {
    test('should not display group name input whilst conversation selector visible', () => {
     const { getByTestId } = utils;
     
-    // expect(getByTestId('conversation-selector')).toBeVisible();
     expect(getByTestId('conversation-name-input')).not.toBeVisible();
    })
    
