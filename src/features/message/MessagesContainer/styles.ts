@@ -19,3 +19,10 @@ export const MessagesDisplay = styled.div<ThemeProps<Theme>>`
    background: ${({ theme }) => theme.background.messagesDisplay};
    border: ${({ theme }) => theme.border};
 `;
+
+export const LoadingContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0 10px;
+`;
