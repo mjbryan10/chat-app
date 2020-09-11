@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
    selectMessages,
@@ -30,12 +30,22 @@ const MessagesContainer = () => {
    const loadingStatus = useSelector(selectMessageLoadingStatus);
    const dispatch = useDispatch();
 
+   //STATE:
+   /**
+    * Local state for holding conversation Participants details.
+    */
+   const [participants, setParticipants] = useState<Participant[]>([]);
+
+   //EFFECTS:
    /**
     * Initial message fetching and population
     */
    useEffect(() => {
       //Fetches the messages
       if (conversationId) dispatch(fetchConversationMessages({ conversationId }));
+
+      // if(messageDisplayRef)
+      // messageDisplayRef.current.scr
    }, [conversationId, dispatch]);
 
    /**
@@ -44,32 +54,25 @@ const MessagesContainer = () => {
     * Polls the database for new messages at every interval.
     */
    useEffect(() => {
-      //TODO: Uncomment
-      //    const retreiveMessages = () => {
-      //    if (conversationId && messages.length) {
-      //       dispatch(
-      //          fetchNewMessages({
-      //             conversationId,
-      //             lastMessageId: messages[messages.length - 1].id,
-      //          })
-      //       );
-      //    } else if (conversationId) {
-      //       dispatch(fetchConversationMessages({ conversationId }));
-      //    }
-      // };
-      //    const refreshMessages = setInterval(() => {
-      //       console.log('refreshed');
-      //          retreiveMessages();
-      //    }, 5000);
-      //    return () => {
-      //       clearInterval(refreshMessages);
-      //    };
+      const retreiveMessages = () => {
+         if (conversationId && messages.length) {
+            dispatch(
+               fetchNewMessages({
+                  conversationId,
+                  lastMessageId: messages[messages.length - 1].id,
+               })
+            );
+         } else if (conversationId) {
+            dispatch(fetchConversationMessages({ conversationId }));
+         }
+      };
+      const refreshMessages = setInterval(() => {
+         retreiveMessages();
+      }, 3000);
+      return () => {
+         clearInterval(refreshMessages);
+      };
    }, [conversationId, dispatch, messages]);
-
-   /**
-    * Local state for holding conversation Participants details.
-    */
-   const [participants, setParticipants] = useState<Participant[]>([]);
 
    /**
     * Updates the participants state should the current conversation
@@ -82,7 +85,7 @@ const MessagesContainer = () => {
          let colorsIndex = 0;
          currentConversation.users.forEach((user) => {
             const isOwner = user.userid === currentUser.id;
-            const color: ThemeColor = (isOwner) ? "owner" : colors[colorsIndex]
+            const color: ThemeColor = isOwner ? 'owner' : colors[colorsIndex];
             if (!isOwner) colorsIndex++;
             if (colorsIndex >= colors.length) colorsIndex = 0;
             const newParticipant = {
@@ -106,6 +109,17 @@ const MessagesContainer = () => {
       }
    }, [currentConversation, currentUser.id]);
 
+   //--- Logic responsible for scroll to bottom
+   const messagesEndRef = useRef<HTMLDivElement>(null);
+   const scrollToBottom = () => {
+      if (messagesEndRef.current !== null) {
+         messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+   };
+   useLayoutEffect(() => scrollToBottom(), [messages]);
+   //---
+
+   //METHODS:
    /**
     * An on submit handler for handling a form submission for a new message.
     *
@@ -132,6 +146,7 @@ const MessagesContainer = () => {
          }, 300);
       }
    };
+
    /**
     * Informs if creator should be disabled.
     *
@@ -146,9 +161,14 @@ const MessagesContainer = () => {
             {messages.length && participants.length ? (
                <MessageList messages={messages} participants={participants} />
             ) : loadingStatus !== 'idle' ? (
-               <p>No messages yet.</p>
+               <S.NoMessageNotice>No messages yet</S.NoMessageNotice>
             ) : null}
-            {loadingStatus === 'pending' ? <Spinner /> : null}
+            {loadingStatus === 'pending' ? (
+               <S.LoadingContainer>
+                  <Spinner />
+               </S.LoadingContainer>
+            ) : null}
+            <div ref={messagesEndRef} />
          </S.MessagesDisplay>
          <MessageCreator handleSubmit={onMessagePost} disabled={isDisabled} />
       </S.Container>

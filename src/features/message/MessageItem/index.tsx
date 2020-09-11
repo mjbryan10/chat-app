@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import * as S from './styles';
 import { Message } from 'shared/Api/types';
 import { Participant } from '../messageSlice';
@@ -21,16 +21,17 @@ const MessageItem: FC<Props> = ({
    userDetails,
    isChainMessage = false,
 }) => {
-   const {color, isOwner, name} = userDetails;
-   const {timestamp, message } = messageDetails;
-   console.log('timestamp', timestamp);
+   const { color, isOwner, name } = userDetails;
+   const { timestamp, message } = messageDetails;
+   const time = useMemo(
+      () => moment.utc(timestamp, 'YYYY-MM-DD HH:mm:ss').local().format('HH:mm'),
+      [timestamp]
+   );
    return (
       <S.Container color={color} isChained={isChainMessage} isOwner={isOwner}>
          <S.Header color={color}>
             <S.Detail>{isOwner ? 'You' : name}</S.Detail>
-            <S.Detail>
-               {moment(timestamp, 'YYYY-MM-DD HH:mm:ss').format('HH:mm')}
-            </S.Detail>
+            <S.Detail>{time}</S.Detail>
          </S.Header>
          <S.Body>{message}</S.Body>
       </S.Container>

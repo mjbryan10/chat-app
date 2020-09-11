@@ -28,7 +28,11 @@ const lightTheme: Theme = {
       transition: {...defaultTransitions},
       shadow: {
          inner: defaultInnerShadow,
-      } 
+      },
+      focus: `
+      outline: none;
+      box-shadow: 0 0 10px 0 rgba(0,0,0, 0.4);
+    `,
    }
 };
 
