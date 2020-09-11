@@ -54,7 +54,6 @@ const MessagesContainer = () => {
     * Polls the database for new messages at every interval.
     */
    useEffect(() => {
-      //TODO: Consider exponential poll times if no additional messages.
       const retreiveMessages = () => {
          if (conversationId && messages.length) {
             dispatch(
@@ -69,7 +68,7 @@ const MessagesContainer = () => {
       };
       const refreshMessages = setInterval(() => {
          retreiveMessages();
-      }, 5000);
+      }, 3000);
       return () => {
          clearInterval(refreshMessages);
       };
@@ -164,7 +163,11 @@ const MessagesContainer = () => {
             ) : loadingStatus !== 'idle' ? (
                <p>No messages yet.</p>
             ) : null}
-            {loadingStatus === 'pending' ? <S.LoadingContainer><Spinner /></S.LoadingContainer> : null}
+            {loadingStatus === 'pending' ? (
+               <S.LoadingContainer>
+                  <Spinner />
+               </S.LoadingContainer>
+            ) : null}
             <div ref={messagesEndRef} />
          </S.MessagesDisplay>
          <MessageCreator handleSubmit={onMessagePost} disabled={isDisabled} />
