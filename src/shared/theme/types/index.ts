@@ -93,6 +93,7 @@ export interface ThemeSnippets {
    shadow: {
       inner: string;
    }
+   focus: string;
 }
 /**
  * Export of Theme to 'styled-components'

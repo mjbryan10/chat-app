@@ -12,6 +12,11 @@ const GlobalStyles = createGlobalStyle`
       max-width: 2150px;
       margin: 0 auto;
   }
+  button, input {
+    &:focus {
+      ${({theme}) => theme.snippets.focus}
+    }
+  }
 `;
 
 export default GlobalStyles;

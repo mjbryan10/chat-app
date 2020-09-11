@@ -28,7 +28,11 @@ const darkTheme: Theme = {
       transition: {...defaultTransitions},
       shadow: {
          inner: defaultInnerShadow,
-      } 
+      },
+      focus: `
+      outline: none;
+      box-shadow: 0 0 10px 0 rgba(255,255,255, 0.4);
+    `,
    }
 };
 
