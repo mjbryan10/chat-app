@@ -1,4 +1,4 @@
-#Ch@ 
+# Ch@ 
 
 As a challenge this chat application has been  built using React, using a simple REST API.
 
