@@ -14,6 +14,7 @@ import {
    removeUserFromSelected,
 } from 'features/users/usersSlice';
 import { User } from 'shared/Api/types';
+import { sortUsers } from './helpers';
 
 const ConversationUserSelector = () => {
    //REDUX:
@@ -32,16 +33,6 @@ const ConversationUserSelector = () => {
    }, [dispatch]);
 
    //METHODS:
-
-   /**
-    * Sorts an array of users alphabetically by name.
-    * @param users An array of users to sort by name
-    */
-   const sortUsers = (users: User[]) => {
-      //TODO: Sort alphabetically
-      if (!users.length) return [];
-      return users.slice().sort((a, b) => a.name.localeCompare(b.name));
-   };
    /**
     * Removes a user from one array and places them in the other.
     * @param user The user from which to switch selected status
