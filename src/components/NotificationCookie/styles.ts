@@ -6,6 +6,7 @@ export const NoticeContainer = styled.div<ThemeProps<Theme>>`
    align-items: center;
    position: fixed;
    bottom: 0;
+   left: 0;
    padding: 1em;
    width: 100%;
    background: ${({ theme }) => theme.background.message};
@@ -23,6 +24,6 @@ export const ConfirmationButton = styled.button`
    background: ${({ theme }) => theme.color.success ?? 'green'};
    margin: 5px;
    &:hover {
-     cursor: pointer;
+      cursor: pointer;
    }
 `;
